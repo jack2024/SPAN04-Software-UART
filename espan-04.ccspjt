@@ -1,0 +1,119 @@
+[PROJECT]
+Target=ESPAN-04.hex
+Development_Mode=
+Processor_Text=PIC18F2525
+ToolSuite=CCS
+Processor=0x2525
+[C:\Users\computer\Documents\Temp data\SPAN-04\ESPAN-04]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+[mru-list]
+1=ESPAN-04.c
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+[Units]
+Link=0
+Count=1
+1=ESPAN-04
+[Opened Files]
+1=ESPAN-04.c
+2=ESPAN-04.h
+3=C:\Program Files (x86)\PICC\Devices\18F2525.h
+4=..\..\..\..\..\Program Files (x86)\PICC\Drivers\23S17.c
+5=..\..\..\..\..\Program Files (x86)\PICC\examples\ex_spi.c
+6=..\..\..\..\..\Program Files (x86)\PICC\Drivers\9356spi.c
+7=..\..\..\..\..\Program Files (x86)\PICC\Drivers\input.c
+8=
+t1=26
+t2=1
+t3=1
+t4=1
+t5=1
+t6=1
+t7=1
+Count=3
+
+[ProjectLog]
+Days=4
+D1=25-11-2015
+D1_L=16
+D1_L1=[45582]Project Opened.
+D1_L2=[45611]Project Closed.
+D1_L3=[45978]Project Opened.
+D1_L4=[46093]Project Closed.
+D1_L5=[46143]Project Opened.
+D1_L6=[46315]Project Closed.
+D1_L7=[46435]Project Opened.
+D1_L8=[46475]Project Closed.
+D1_L9=[46514]Project Opened.
+D1_L10=[46520]Project Closed.
+D1_L11=[46810]Project Opened.
+D1_L12=[46851]Project Closed.
+D1_L13=[47540]Project Opened.
+D1_L14=[47565]Project Closed.
+D1_L15=[49705]Project Opened.
+D1_L16=[49721]Project Closed.
+D2=30-11-2015
+D2_L=6
+D2_L1=[56516]Project Opened.
+D2_L2=[56558]Project Closed.
+D2_L3=[56558]Project Opened.
+D2_L4=[56558]Project Closed.
+D2_L5=[56558]Project Opened.
+D2_L6=[56571]Project Closed.
+D3=20-12-2017
+D3_L=2
+D3_L1=[70312]Project Opened.
+D3_L2=[70358]Project Closed.
+D4=21-12-2017
+D4_L=2
+D4_L1=[30511]Project Opened.
+D4_L2=[30672]Project Closed.
+
+[Directories]
+Include=C:\Program Files (x86)\PICC\Drivers\;C:\Program Files (x86)\PICC\Devices\
+Library=
+LinkerScript=
+output=
+
+[defines]
+enabled=0
+chip=1
+D1=
+V1=
+
+[fileformats]
+forcecoff=0
+debug=4
+error=2
+object=0
+list=0
+scratch=0
+sta=1
+tre=1
+expandtree=0
+allerrors=1
+allwarnings=1
+stayupne=3
+stayupoe=0
+
+[Target Data]
+BuildTool=C-COMPILER
+OptionString=+FH
+AdditionalOptionString=
+BuildRequired=1
+
+[ESPAN-04.c]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+
+[CompilerVersion]
+Fixed=
