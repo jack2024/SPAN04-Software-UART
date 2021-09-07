@@ -1,9 +1,11 @@
 [PROJECT]
 Target=ESPAN-04.hex
 Development_Mode=
-Processor_Text=PIC18F2525
+Processor_Text=PIC18F26K22
 ToolSuite=CCS
 Processor=0x2525
+CCSVersion=5.091
+Compiler=PCH
 [C:\Users\computer\Documents\Temp data\SPAN-04\ESPAN-04]
 Type=4
 Path=
@@ -15,21 +17,17 @@ AdditionalOptionString=
 1=ESPAN-04.c
 [Windows]
 0=0000 %S 0 0 796 451 3 0
-[Units]
-Link=0
-Count=1
-1=ESPAN-04
 [Opened Files]
 1=ESPAN-04.c
-2=ESPAN-04.h
-3=C:\Program Files (x86)\PICC\Devices\18F2525.h
+2=C:\Program Files (x86)\PICC\Devices\18F26K22.h
+3=..\ESPAN04_20 - Delay - SP - SMD - PIC18F252\ESPAN-04.h
 4=..\..\..\..\..\Program Files (x86)\PICC\Drivers\23S17.c
 5=..\..\..\..\..\Program Files (x86)\PICC\examples\ex_spi.c
 6=..\..\..\..\..\Program Files (x86)\PICC\Drivers\9356spi.c
 7=..\..\..\..\..\Program Files (x86)\PICC\Drivers\input.c
 8=
-t1=26
-t2=1
+t1=2463
+t2=33
 t3=1
 t4=1
 t5=1
@@ -38,7 +36,7 @@ t7=1
 Count=3
 
 [ProjectLog]
-Days=4
+Days=7
 D1=25-11-2015
 D1_L=16
 D1_L1=[45582]Project Opened.
@@ -73,6 +71,59 @@ D4=21-12-2017
 D4_L=2
 D4_L1=[30511]Project Opened.
 D4_L2=[30672]Project Closed.
+D5=03-09-2021
+D5_L=8
+D5_L1=[31899]Project Opened.
+D5_L2=[31938]Started Editing.
+D5_L3=[32263]Stopped Editing.
+D5_L4=[32357]Started Editing.
+D5_L5=[32657]Stopped Editing.
+D5_L6=[32908]Started Editing.
+D5_L7=[33721]Stopped Editing.
+TotalEdit=21
+TotalDebug=0
+D5_E=9
+D5_D=0
+D5_L8=[37118]Project Closed.
+D6=06-09-2021
+D6_L=14
+D6_L1=[30164]Project Opened.
+D6_L2=[34448]Started Editing.
+D6_L3=[35071]Stopped Editing.
+D6_L4=[37793]Started Editing.
+D6_L5=[38094]Stopped Editing.
+D6_L6=[39336]Started Editing.
+D6_L7=[39730]Stopped Editing.
+D6_L8=[47590]Started Editing.
+D6_L9=[48069]Stopped Editing.
+D6_L10=[48842]Started Editing.
+D6_L11=[49142]Stopped Editing.
+D6_L12=[56149]Started Editing.
+D6_L13=[56466]Stopped Editing.
+D6_E=11
+D6_D=0
+D6_L14=[61918]Project Closed.
+D7=07-09-2021
+D7_L=17
+D7_L1=[29320]Project Opened.
+D7_L2=[32708]Started Editing.
+D7_L3=[33010]Stopped Editing.
+D7_L4=[34759]Started Editing.
+D7_L5=[35059]Stopped Editing.
+D7_L6=[35845]Started Editing.
+D7_L7=[36145]Stopped Editing.
+D7_L8=[36169]Started Editing.
+D7_L9=[36493]Stopped Editing.
+D7_L10=[37583]Started Editing.
+D7_L11=[37914]Stopped Editing.
+D7_E=1
+D7_D=0
+D7_L12=[38147]Project Closed.
+D7_L13=[38421]Project Opened.
+D7_L14=[38432]Project Closed.
+D7_L15=[39449]Project Opened.
+D7_L16=[39487]Started Editing.
+D7_L17=[40144]Stopped Editing.
 
 [Directories]
 Include=C:\Program Files (x86)\PICC\Drivers\;C:\Program Files (x86)\PICC\Devices\
@@ -85,6 +136,7 @@ enabled=0
 chip=1
 D1=
 V1=
+buildcount=11
 
 [fileformats]
 forcecoff=0
@@ -106,6 +158,7 @@ BuildTool=C-COMPILER
 OptionString=+FH
 AdditionalOptionString=
 BuildRequired=1
+FileList=ESPAN-04.c
 
 [ESPAN-04.c]
 Type=4
@@ -117,3 +170,6 @@ AdditionalOptionString=
 
 [CompilerVersion]
 Fixed=
+[Units]
+Count=1
+1=ESPAN-04 (main)

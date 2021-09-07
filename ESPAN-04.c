@@ -1,5 +1,6 @@
 
-#include "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_16\ESPAN-04.h"
+//#include "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_16\ESPAN-04.h"
+#include "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_20 - Delay - SP - SMD - PIC18F252\ESPAN-04.h"
 #include "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_16\23S17.c" // 16 bit I/O Expander
 
 #define Pled        PIN_B5
@@ -30,7 +31,15 @@
 
 //#define NUMBER_OF_595 8
 
-#use rs232(baud=9600,parity=N,xmit=PTxD,rcv=PRxD,bits=8,restart_wdt)
+//#use rs232(baud=9600,parity=N,xmit=PTxD,rcv=PRxD,bits=8,restart_wdt)
+/* Config and Enable Hardware UART1(RC6=TX1,RC7=RX1 */
+#use rs232(uart1, baud=9600, stream=CH1)
+
+/* Config and Enable Software UART2(RC0=TX2,RC1=RX2 */
+
+#define TX2 PIN_B0                                                            // RC0 = TXD
+#define RX2 PIN_B1                                                            // RC1 = RXD
+#use rs232(baud=9600, xmit=TX2, rcv=RX2,stream=CH2)
 
 //#USE SPI (  FORCE_HW, BITS=16, ENABLE=IO_CS_PIN, SAMPLE_RISE, stream=SPI_STREAM) 
 //#USE SPI (  FORCE_HW, BITS=16, ENABLE=IO_CS_PIN, SAMPLE_RISE, stream=SPI_STREAM2)
@@ -269,14 +278,14 @@ unsigned  char const CRC_Table_Lo[] = {
 
 ///////////// Define Bit register ////////////////////////////
 
-struct Bit64    // Input
+struct Bit64    // Inputt
 {
    int1 B1,B2,B3,B4,B5,B6,B7,B8;
 
 };
 
 
-struct Bit64 Input,Output,InputType,FaultType,OutputType,OutputBoth;
+struct Bit64 Inputt,Output,InputType,FaultType,OutputType,OutputBoth;
 struct Bit64 AlarmIndicator,Ack,In,In2;
 struct Bit64 LED_Colour,AckSend,RED_Colour,GREEN_Colour;
 struct Bit64 SendSMS;
@@ -1322,7 +1331,7 @@ void Modbus_Function(void)
 
             write_eeprom(0x00,0x0F);
 
-            write_eeprom(0x01,RxD_Buff[3]);   //Input Type
+            write_eeprom(0x01,RxD_Buff[3]);   //Inputt Type
             write_eeprom(0x02,RxD_Buff[4]);
             write_eeprom(0x03,RxD_Buff[5]);
 
@@ -1746,28 +1755,28 @@ void Read_Input(void)
                      switch(i)
                      {
                         case 1:
-                           Input.B1 = 0; 
+                           Inputt.B1 = 0; 
                         break;
                         case 2:
-                           Input.B2 = 0; 
+                           Inputt.B2 = 0; 
                         break;
                         case 3:
-                           Input.B3 = 0; 
+                           Inputt.B3 = 0; 
                         break;
                         case 4:
-                           Input.B4 = 0; 
+                           Inputt.B4 = 0; 
                         break;
                         case 5:
-                           Input.B5 = 0; 
+                           Inputt.B5 = 0; 
                         break;
                         case 6:
-                           Input.B6 = 0; 
+                           Inputt.B6 = 0; 
                         break;
                         case 7:
-                           Input.B7 = 0; 
+                           Inputt.B7 = 0; 
                          break;
                          case 8:
-                           Input.B8 = 0; 
+                           Inputt.B8 = 0; 
                         break;
            
                      }                 
@@ -1790,28 +1799,28 @@ void Read_Input(void)
                      switch(i)
                      {
                         case 1:
-                           Input.B1 = 1; 
+                           Inputt.B1 = 1; 
                         break;
                         case 2:
-                           Input.B2 = 1; 
+                           Inputt.B2 = 1; 
                         break;
                         case 3:
-                           Input.B3 = 1; 
+                           Inputt.B3 = 1; 
                         break;
                         case 4:
-                           Input.B4 = 1; 
+                           Inputt.B4 = 1; 
                         break;
                         case 5:
-                           Input.B5 = 1; 
+                           Inputt.B5 = 1; 
                         break;
                         case 6:
-                           Input.B6 = 1; 
+                           Inputt.B6 = 1; 
                         break;
                         case 7:
-                           Input.B7 = 1; 
+                           Inputt.B7 = 1; 
                          break;
                          case 8:
-                           Input.B8 = 1; 
+                           Inputt.B8 = 1; 
                         break;
          
                      }                 
@@ -1838,28 +1847,28 @@ void Read_Input(void)
                      switch(i)
                      {
                         case 1:
-                           Input.B1 = 1; 
+                           Inputt.B1 = 1; 
                         break;
                         case 2:
-                           Input.B2 = 1; 
+                           Inputt.B2 = 1; 
                         break;
                         case 3:
-                           Input.B3 = 1; 
+                           Inputt.B3 = 1; 
                         break;
                         case 4:
-                           Input.B4 = 1; 
+                           Inputt.B4 = 1; 
                         break;
                         case 5:
-                           Input.B5 = 1; 
+                           Inputt.B5 = 1; 
                         break;
                         case 6:
-                           Input.B6 = 1; 
+                           Inputt.B6 = 1; 
                         break;
                         case 7:
-                           Input.B7 = 1; 
+                           Inputt.B7 = 1; 
                          break;
                          case 8:
-                           Input.B8 = 1; 
+                           Inputt.B8 = 1; 
                         break;
                                            
                      }                 
@@ -1882,28 +1891,28 @@ void Read_Input(void)
                      switch(i)
                      {
                         case 1:
-                           Input.B1 = 0; 
+                           Inputt.B1 = 0; 
                         break;
                         case 2:
-                           Input.B2 = 0; 
+                           Inputt.B2 = 0; 
                         break;
                         case 3:
-                           Input.B3 = 0; 
+                           Inputt.B3 = 0; 
                         break;
                         case 4:
-                           Input.B4 = 0; 
+                           Inputt.B4 = 0; 
                         break;
                         case 5:
-                           Input.B5 = 0; 
+                           Inputt.B5 = 0; 
                         break;
                         case 6:
-                           Input.B6 = 0; 
+                           Inputt.B6 = 0; 
                         break;
                         case 7:
-                           Input.B7 = 0; 
+                           Inputt.B7 = 0; 
                          break;
                          case 8:
-                           Input.B8 = 0; 
+                           Inputt.B8 = 0; 
                         break;
               
                      }                 
@@ -1922,14 +1931,14 @@ void Read_Input(void)
 
    
       Input1_8 = 0x00;
-      Input1_8 = Input1_8 | ~Input.B8;
-      Input1_8 = (Input1_8 << 1) | ~Input.B7;
-      Input1_8 = (Input1_8 << 1) | ~Input.B6;
-      Input1_8 = (Input1_8 << 1) | ~Input.B5;
-      Input1_8 = (Input1_8 << 1) | ~Input.B4;
-      Input1_8 = (Input1_8 << 1) | ~Input.B3;
-      Input1_8 = (Input1_8 << 1) | ~Input.B2;
-      Input1_8 = (Input1_8 << 1) | ~Input.B1;
+      Input1_8 = Input1_8 | ~Inputt.B8;
+      Input1_8 = (Input1_8 << 1) | ~Inputt.B7;
+      Input1_8 = (Input1_8 << 1) | ~Inputt.B6;
+      Input1_8 = (Input1_8 << 1) | ~Inputt.B5;
+      Input1_8 = (Input1_8 << 1) | ~Inputt.B4;
+      Input1_8 = (Input1_8 << 1) | ~Inputt.B3;
+      Input1_8 = (Input1_8 << 1) | ~Inputt.B2;
+      Input1_8 = (Input1_8 << 1) | ~Inputt.B1;
     
 
    
@@ -1942,7 +1951,7 @@ void Read_Config(void)
 {
    
 
-   EEpDat = read_eeprom(0x01);   // Input type 1-8
+   EEpDat = read_eeprom(0x01);   // Inputt type 1-8
    InputType1_8 = EEpDat;
 
    InputType.B1 = EEpDat;
@@ -2052,7 +2061,7 @@ void Read_Config(void)
    AutoAckTime = read_eeprom(0x19);      // Auto Acknoeledge Time
    FlashingRate = read_eeprom(0x1A); // Flashing rate
    NoOfPoint = read_eeprom(0x1B);        // Number of total point
-   FaultDelayTime = read_eeprom(0x1C);  // Master or slave sync(flashing)
+   FlashingRateTime = read_eeprom(0x1C);  // Master or slave sync(flashing)
 
    Address = read_eeprom(0x1D);          //Communication address
    
@@ -2076,7 +2085,6 @@ void Read_Config(void)
    FaultDelayTime[18] = read_eeprom(0x2F);
    FaultDelayTime[19] = read_eeprom(0x30);
    FaultDelayTime[20] = read_eeprom(0x31);
-   
    
    unsigned int  a = 0; 
    unsigned char  phonenum;
@@ -2119,8 +2127,7 @@ void Read_Config(void)
       }
       else
       {
-         SMS_Massage1[j] = buff;
-         
+         SMS_Massage1[j] = buff;  
       }
    }
    
@@ -2382,13 +2389,8 @@ void TIMER2_isr(void)      //10ms
          }
       }
 
-   }
-   
+   } 
 }
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
 
 //////////////////////////////////////////////////////////////////////////////
 void Anal_Function(void)
@@ -2404,8 +2406,8 @@ void Anal_Function(void)
 //input1
    if(AlarmIndicator.B1 == 1)    // Alarm Function
    {
-      if((((Input.B1 ^ InputType.B1) == 1) && (FaultType.B1 == 1))|| In.B1 == 1)    // alarm1 occure and "Lock type"
-      //if(Input.B1 == 0)
+      if((((Inputt.B1 ^ InputType.B1) == 1) && (FaultType.B1 == 1))|| In.B1 == 1)    // alarm1 occure and "Lock type"
+      //if(Inputt.B1 == 0)
       {
          if(Ack.B1 == 0)
          {
@@ -2441,56 +2443,60 @@ void Anal_Function(void)
                
             }
             
+            
             // SMS Sending   
             if((SendSMS.B1 ==0) && (functointest_f ==0) && (Ack.B1 ==0))
             {
-               printf("AT+CMGF=1"); 
-               putc('\n');
+               fprintf(CH2,"AT+CMGF=1"); 
+               putc('\n',CH2);
                delay_ms(10);
             
                SendSMS.B1 =1;
-               printf("AT+CMGS=\"");
-               printf(sms_phonenumber);
+               fprintf(CH2,"AT+CMGS=\"");
+               fprintf(CH2,sms_phonenumber);
                
-               printf("\"");
-               putc('\n');
+               fprintf(CH1,"\"");
+               putc('\n',CH2);
                delay_ms(50);
               
-              //printf("Fault No.1"); 
-              printf(SMS_Massage1);
-              putc('\n');
-              putc(26);
+              //fprintf(CH2,"Fault No.1"); 
+              fprintf(CH2,SMS_Massage1);
+              putc('\n',CH2);
+              putc(26,CH2);
             }
+            
         }
       }
       else if(FaultType.B1 == 1) Ack.B1 = 0;
    }
    else  //Indicator Function
    {
-      if((Input.B1 ^ InputType.B1) == 1)
+      if((Inputt.B1 ^ InputType.B1) == 1)
       {
          Output.B1 = 0;
          
+         /*
          // SMS Sending   
          if((SendSMS.B1 ==0) && (functointest_f ==0) && (Ack.B1 ==0))
          {
-            printf("AT+CMGF=1"); 
-            putc('\n');
+            fprintf(CH2,"AT+CMGF=1"); 
+            putc('\n',CH2);
             delay_ms(10);
             
             SendSMS.B1 =1;
-            printf("AT+CMGS=\"");
-            printf(sms_phonenumber);
+            fprintf(CH2,"AT+CMGS=\"");
+            fprintf(CH2,sms_phonenumber);
             
-            printf("\"");
-            putc('\n');
+            fprintf(CH2,"\"");
+            putc('\n',CH2);
             delay_ms(50);
            
-           //printf("Fault No.1");
-           printf(SMS_Massage1);
-           putc('\n');
-           putc(26);
+           //fprintf(CH2,"Fault No.1");
+           fprintf(CH2,SMS_Massage1);
+           putc('\n',CH2);
+          putc(26,CH2);
          }
+         */
       }
       else
       {
@@ -2504,8 +2510,8 @@ void Anal_Function(void)
 //input2
    if(AlarmIndicator.B2 == 1)    // Alarm Function
    {
-      if((((Input.B2 ^ InputType.B2) == 1) && (FaultType.B2 == 1))|| In.B2 == 1)    // alarm1 occure and "Lock type"
-      //if(Input.B2 == 0)
+      if((((Inputt.B2 ^ InputType.B2) == 1) && (FaultType.B2 == 1))|| In.B2 == 1)    // alarm1 occure and "Lock type"
+      //if(Inputt.B2 == 0)
       {
          if(Ack.B2 == 0)
          {
@@ -2538,27 +2544,26 @@ void Anal_Function(void)
                   if(OutputType.B2 == 1) output_bit(Pbuzzer,0);     //Buzzer
                   else output_bit(Pbell,0);                          //Bell
                }
-               
             }
           }
           // SMS Sending   
             if((SendSMS.B2 ==0)&& (functointest_f ==0) && (Ack.B2 ==0))
             {
-               printf("AT+CMGF=1"); 
-               putc('\n');
+               fprintf(CH2,"AT+CMGF=1"); 
+               putc('\n',CH2);
                delay_ms(10);
                 
                SendSMS.B2 =1;
-               printf("AT+CMGS=\"");
-               printf(sms_phonenumber);
+               fprintf(CH2,"AT+CMGS=\"");
+               fprintf(CH2,sms_phonenumber);
                
-               printf("\"");
-               putc('\n');
+               fprintf(CH2,"\"");
+               putc('\n',CH2);
                delay_ms(50);
                
-              printf(SMS_Massage2);
-              putc('\n');
-              putc(26);
+              fprintf(CH2,SMS_Massage2);
+              putc('\n',CH2);
+             putc(26,CH2);
             }  
 
       }
@@ -2566,33 +2571,32 @@ void Anal_Function(void)
    }
    else  //Indicator Function
    {
-      if((Input.B2 ^ InputType.B2) == 1)
+      if((Inputt.B2 ^ InputType.B2) == 1)
       {
          Output.B2 = 0;
           // SMS Sending   
          if((SendSMS.B2 ==0)&& (functointest_f ==0) && (Ack.B2 ==0))
          {
-            printf("AT+CMGF=1"); 
-            putc('\n');
+            fprintf(CH2,"AT+CMGF=1"); 
+            putc('\n',CH2);
             delay_ms(10);
             
             SendSMS.B2 =1;
-            printf("AT+CMGS=\"");
-            printf(sms_phonenumber);
+            fprintf(CH2,"AT+CMGS=\"");
+            fprintf(CH2,sms_phonenumber);
             
             printf("\"");
-            putc('\n');
+            putc('\n',CH2);
             delay_ms(50);
            
-           printf(SMS_Massage1);
-           putc('\n');
-           putc(26);
+           fprintf(CH2,SMS_Massage1);
+           putc('\n',CH2);
+           putc(26,CH2);
          }  
       }
       else
       {
          Output.B2 = 1;
-         
          SendSMS.B2 =0;
          functointest_f =0;
       }
@@ -2601,8 +2605,8 @@ void Anal_Function(void)
 //input3
    if(AlarmIndicator.B3 == 1)    // Alarm Function
    {
-      if((((Input.B3 ^ InputType.B3) == 1) && (FaultType.B3 == 1))|| In.B3 == 1)    // alarm1 occure and "Lock type"
-      //if(Input.B3 == 0)
+      if((((Inputt.B3 ^ InputType.B3) == 1) && (FaultType.B3 == 1))|| In.B3 == 1)    // alarm1 occure and "Lock type"
+      //if(Inputt.B3 == 0)
       {
          if(Ack.B3 == 0)
          {
@@ -2641,21 +2645,21 @@ void Anal_Function(void)
           // SMS Sending   
             if((SendSMS.B3 ==0)&& (functointest_f ==0) && (Ack.B3 ==0))
             {
-               printf("AT+CMGF=1"); 
-               putc('\n');
+               fprintf(CH2,"AT+CMGF=1"); 
+               putc('\n',CH2);
                delay_ms(10);
                
                SendSMS.B3 =1;
-               printf("AT+CMGS=\"");
-               printf(sms_phonenumber);
+               fprintf(CH2,"AT+CMGS=\"");
+               fprintf(CH2,sms_phonenumber);
                
-               printf("\"");
-               putc('\n');
+               fprintf(CH2,"\"");
+               putc('\n',CH2);
                delay_ms(50);
               
-              printf(SMS_Massage3);
-              putc('\n');
-              putc(26);
+              fprintf(CH2,SMS_Massage3);
+              putc('\n',CH2);
+             putc(26,CH2);
             }
 
       }
@@ -2663,27 +2667,27 @@ void Anal_Function(void)
    }
    else  //Indicator Function
    {
-      if((Input.B3 ^ InputType.B3) == 1)
+      if((Inputt.B3 ^ InputType.B3) == 1)
       {
          Output.B3 = 0;
          // SMS Sending   
          if((SendSMS.B3 ==0)&& (functointest_f ==0) && (Ack.B3 ==0))
          {
-            printf("AT+CMGF=1"); 
-            putc('\n');
+            fprintf(CH2,"AT+CMGF=1"); 
+            putc('\n',CH2);
             delay_ms(10);
             
             SendSMS.B3 =1;
-            printf("AT+CMGS=\"");
-            printf(sms_phonenumber);
+            fprintf(CH2,"AT+CMGS=\"");
+            fprintf(CH2,sms_phonenumber);
             
-            printf("\"");
-            putc('\n');
+            fprintf(CH2,"\"");
+            putc('\n',CH2);
             delay_ms(50);
            
-           printf(SMS_Massage3);
-           putc('\n');
-           putc(26);
+           fprintf(CH2,SMS_Massage3);
+           putc('\n',CH2);
+          putc(26,CH2);
          }
       }
       else
@@ -2696,8 +2700,8 @@ void Anal_Function(void)
 //input4
    if(AlarmIndicator.B4 == 1)    // Alarm Function
    {
-      if((((Input.B4 ^ InputType.B4) == 1) && (FaultType.B4 == 1))|| In.B4 == 1)    // alarm1 occure and "Lock type"
-      //if(Input.B4 == 0)
+      if((((Inputt.B4 ^ InputType.B4) == 1) && (FaultType.B4 == 1))|| In.B4 == 1)    // alarm1 occure and "Lock type"
+      //if(Inputt.B4 == 0)
       {
          if(Ack.B4 == 0)
          {
@@ -2736,21 +2740,21 @@ void Anal_Function(void)
           // SMS Sending   
             if((SendSMS.B4 ==0)&& (functointest_f ==0) && (Ack.B4 ==0))
             {
-               printf("AT+CMGF=1"); 
-               putc('\n');
+               fprintf(CH2,"AT+CMGF=1"); 
+               putc('\n',CH2);
                delay_ms(10);
                
                SendSMS.B4 =1;
-               printf("AT+CMGS=\"");
-               printf(sms_phonenumber);
+               fprintf(CH2,"AT+CMGS=\"");
+               fprintf(CH2,sms_phonenumber);
             
-               printf("\"");
-               putc('\n');
+               fprintf(CH2,"\"");
+               putc('\n',CH2);
                delay_ms(50);
               
-              printf(SMS_Massage4);
-              putc('\n');
-              putc(26);
+              fprintf(CH2,SMS_Massage4);
+              putc('\n',CH2);
+             putc(26,CH2);
             }
 
       }
@@ -2758,28 +2762,28 @@ void Anal_Function(void)
    }
    else  //Indicator Function
    {
-      if((Input.B4 ^ InputType.B4) == 1)
+      if((Inputt.B4 ^ InputType.B4) == 1)
       {
          Output.B4 = 0;
          
          // SMS Sending   
          if((SendSMS.B4 ==0)&& (functointest_f ==0) && (Ack.B4 ==0))
          {
-            printf("AT+CMGF=1"); 
-            putc('\n');
+            fprintf(CH2,"AT+CMGF=1"); 
+            putc('\n',CH2);
             delay_ms(10);
             
             SendSMS.B4 =1;
-            printf("AT+CMGS=\"");
-            printf(sms_phonenumber);
+            fprintf(CH2,"AT+CMGS=\"");
+            fprintf(CH2,sms_phonenumber);
          
-            printf("\"");
-            putc('\n');
+            fprintf(CH2,"\"");
+            putc('\n',CH2);
             delay_ms(50);
            
-           printf(SMS_Massage4);
-           putc('\n');
-           putc(26);
+           fprintf(CH2,SMS_Massage4);
+           putc('\n',CH2);
+          putc(26,CH2);
          }
       }
       else
@@ -2792,8 +2796,8 @@ void Anal_Function(void)
 //input5
    if(AlarmIndicator.B5 == 1)    // Alarm Function
    {
-      if((((Input.B5 ^ InputType.B5) == 1) && (FaultType.B5 == 1))|| In.B5 == 1)    // alarm1 occure and "Lock type"
-      //if(Input.B5 == 0)
+      if((((Inputt.B5 ^ InputType.B5) == 1) && (FaultType.B5 == 1))|| In.B5 == 1)    // alarm1 occure and "Lock type"
+      //if(Inputt.B5 == 0)
       {
          if(Ack.B5 == 0)
          {
@@ -2833,21 +2837,21 @@ void Anal_Function(void)
           // SMS Sending   
             if((SendSMS.B5 ==0)&& (functointest_f ==0) && (Ack.B5 ==0))
             {
-               printf("AT+CMGF=1"); 
-               putc('\n');
+               fprintf(CH2,"AT+CMGF=1"); 
+               putc('\n',CH2);
                delay_ms(10);
                
                SendSMS.B5 =1;
-               printf("AT+CMGS=\"");
-               printf(sms_phonenumber);
+               fprintf(CH2,"AT+CMGS=\"");
+               fprintf(CH2,sms_phonenumber);
                
-               printf("\"");
-               putc('\n');
+               fprintf(CH2,"\"");
+               putc('\n',CH2);
                delay_ms(50);
               
-              printf(SMS_Massage5);
-              putc('\n');
-              putc(26);
+              fprintf(CH2,SMS_Massage5);
+              putc('\n',CH2);
+             putc(26,CH2);
             }
 
       }
@@ -2855,27 +2859,27 @@ void Anal_Function(void)
    }
    else  //Indicator Function
    {
-      if((Input.B5 ^ InputType.B5) == 1)
+      if((Inputt.B5 ^ InputType.B5) == 1)
       {
          Output.B5 = 0;
          // SMS Sending   
          if((SendSMS.B5 ==0)&& (functointest_f ==0) && (Ack.B5 ==0))
          {
-            printf("AT+CMGF=1"); 
-            putc('\n');
+            fprintf(CH2,"AT+CMGF=1"); 
+            putc('\n',CH2);
             delay_ms(10);
             
             SendSMS.B5 =1;
-            printf("AT+CMGS=\"");
-            printf(sms_phonenumber);
+            fprintf(CH2,"AT+CMGS=\"");
+            fprintf(CH2,sms_phonenumber);
             
-            printf("\"");
-            putc('\n');
+            fprintf(CH2,"\"");
+            putc('\n',CH2);
             delay_ms(50);
            
-           printf(SMS_Massage5);  
-           putc('\n');
-           putc(26);
+           fprintf(CH2,SMS_Massage5);  
+           putc('\n',CH2);
+          putc(26,CH2);
          }
       }
       else
@@ -2888,8 +2892,8 @@ void Anal_Function(void)
 //input6
    if(AlarmIndicator.B6 == 1)    // Alarm Function
    {
-      if((((Input.B6 ^ InputType.B6) == 1) && (FaultType.B6 == 1))|| In.B6 == 1)    // alarm1 occure and "Lock type"
-      //if(Input.B6 == 0)
+      if((((Inputt.B6 ^ InputType.B6) == 1) && (FaultType.B6 == 1))|| In.B6 == 1)    // alarm1 occure and "Lock type"
+      //if(Inputt.B6 == 0)
       {
          if(Ack.B6 == 0)
          {
@@ -2929,21 +2933,21 @@ void Anal_Function(void)
           // SMS Sending   
             if((SendSMS.B6 ==0)&& (functointest_f ==0) && (Ack.B6 ==0))
             {
-               printf("AT+CMGF=1"); 
-               putc('\n');
+               fprintf(CH2,"AT+CMGF=1"); 
+               putc('\n',CH2);
                delay_ms(10);
                
                SendSMS.B6 =1;
-               printf("AT+CMGS=\"");
-               printf(sms_phonenumber);
+               fprintf(CH2,"AT+CMGS=\"");
+               fprintf(CH2,sms_phonenumber);
                
-               printf("\"");
-               putc('\n');
+               fprintf(CH2,"\"");
+               putc('\n',CH2);
                delay_ms(50);
               
-              printf(SMS_Massage6);
-              putc('\n');
-              putc(26);
+              fprintf(CH2,SMS_Massage6);
+              putc('\n',CH2);
+             putc(26,CH2);
             }
 
       }
@@ -2951,27 +2955,27 @@ void Anal_Function(void)
    }
    else  //Indicator Function
    {
-      if((Input.B6 ^ InputType.B6) == 1)
+      if((Inputt.B6 ^ InputType.B6) == 1)
       {
          Output.B6 = 0;
          // SMS Sending   
          if((SendSMS.B6 ==0)&& (functointest_f ==0) && (Ack.B6 ==0))
          {
-            printf("AT+CMGF=1"); 
-            putc('\n');
+            fprintf(CH2,"AT+CMGF=1"); 
+            putc('\n',CH2);
             delay_ms(10);
             
             SendSMS.B6 =1;
-            printf("AT+CMGS=\"");
-            printf(sms_phonenumber);
+            fprintf(CH2,"AT+CMGS=\"");
+            fprintf(CH2,sms_phonenumber);
             
-            printf("\"");
-            putc('\n');
+            fprintf(CH2,"\"");
+            putc('\n',CH2);
             delay_ms(50);
            
-           printf(SMS_Massage6);  
-           putc('\n');
-           putc(26);
+           fprintf(CH2,SMS_Massage6);  
+           putc('\n',CH2);
+          putc(26,CH2);
          }
       }
       else
@@ -2984,8 +2988,8 @@ void Anal_Function(void)
 //input7
    if(AlarmIndicator.B7 == 1)    // Alarm Function
    {
-      if((((Input.B7 ^ InputType.B7) == 1) && (FaultType.B7 == 1))|| In.B7 == 1)    // alarm1 occure and "Lock type"
-      //if(Input.B7 == 0)
+      if((((Inputt.B7 ^ InputType.B7) == 1) && (FaultType.B7 == 1))|| In.B7 == 1)    // alarm1 occure and "Lock type"
+      //if(Inputt.B7 == 0)
       {
          if(Ack.B7 == 0)
          {
@@ -3025,21 +3029,21 @@ void Anal_Function(void)
           // SMS Sending   
             if((SendSMS.B7 ==0)&& (functointest_f ==0) && (Ack.B7 ==0))
             {
-               printf("AT+CMGF=1"); 
-               putc('\n');
+               fprintf(CH2,"AT+CMGF=1"); 
+               putc('\n',CH2);
                delay_ms(10);
                
                SendSMS.B7 =1;
-               printf("AT+CMGS=\"");
-               printf(sms_phonenumber);
+               fprintf(CH2,"AT+CMGS=\"");
+               fprintf(CH2,sms_phonenumber);
                
-               printf("\"");
-               putc('\n');
+               fprintf(CH2,"\"");
+               putc('\n',CH2);
                delay_ms(50);
               
-              printf(SMS_Massage7);  
-              putc('\n');
-              putc(26);
+              fprintf(CH2,SMS_Massage7);  
+              putc('\n',CH2);
+             putc(26,CH2);
             }
 
       }
@@ -3047,27 +3051,27 @@ void Anal_Function(void)
    }
    else  //Indicator Function
    {
-      if((Input.B7 ^ InputType.B7) == 1)
+      if((Inputt.B7 ^ InputType.B7) == 1)
       {
          Output.B7 = 0;
          // SMS Sending   
          if((SendSMS.B7 ==0)&& (functointest_f ==0) && (Ack.B7 ==0))
          {
-            printf("AT+CMGF=1"); 
-            putc('\n');
+            fprintf(CH2,"AT+CMGF=1"); 
+            putc('\n',CH2);
             delay_ms(10);
             
             SendSMS.B7 =1;
-            printf("AT+CMGS=\"");
-            printf(sms_phonenumber);
+            fprintf(CH2,"AT+CMGS=\"");
+            fprintf(CH2,sms_phonenumber);
             
-            printf("\"");
-            putc('\n');
+            fprintf(CH2,"\"");
+            putc('\n',CH2);
             delay_ms(50);
            
-           printf(SMS_Massage7); 
-           putc('\n');
-           putc(26);
+           fprintf(CH2,SMS_Massage7); 
+           putc('\n',CH2);
+          putc(26,CH2);
          }
       }
       else
@@ -3080,8 +3084,8 @@ void Anal_Function(void)
 //input8
    if(AlarmIndicator.B8 == 1)    // Alarm Function
    {
-      if((((Input.B8 ^ InputType.B8) == 1) && (FaultType.B8 == 1))|| In.B8 == 1)    // alarm1 occure and "Lock type"
-      //if(Input.B8 == 0)
+      if((((Inputt.B8 ^ InputType.B8) == 1) && (FaultType.B8 == 1))|| In.B8 == 1)    // alarm1 occure and "Lock type"
+      //if(Inputt.B8 == 0)
       {
          if(Ack.B8 == 0)
          {
@@ -3121,21 +3125,21 @@ void Anal_Function(void)
        // SMS Sending   
             if((SendSMS.B8 ==0)&& (functointest_f ==0) && (Ack.B8 ==0))
             {
-               printf("AT+CMGF=1"); 
-               putc('\n');
+               fprintf(CH2,"AT+CMGF=1"); 
+               putc('\n',CH2);
                delay_ms(10);
                
                SendSMS.B8 =1;
-               printf("AT+CMGS=\"");
-               printf(sms_phonenumber);
+               fprintf(CH2,"AT+CMGS=\"");
+               fprintf(CH2,sms_phonenumber);
                
-               printf("\"");
-               putc('\n');
+               fprintf(CH2,"\"");
+               putc('\n',CH2);
                delay_ms(50);
               
               printf(SMS_Massage8);  
-              putc('\n');
-              putc(26);
+              putc('\n',CH2);
+             putc(26,CH2);
             }
 
       }
@@ -3143,27 +3147,27 @@ void Anal_Function(void)
    }
    else  //Indicator Function
    {
-      if((Input.B8 ^ InputType.B8) == 1)
+      if((Inputt.B8 ^ InputType.B8) == 1)
       {
          Output.B8 = 0;
          // SMS Sending   
          if((SendSMS.B8 ==0)&& (functointest_f ==0) && (Ack.B8 ==0))
          {
             printf("AT+CMGF=1"); 
-            putc('\n');
+            putc('\n',CH2);
             delay_ms(10);
             
             SendSMS.B8 =1;
-            printf("AT+CMGS=\"");
-            printf(sms_phonenumber);
+            fprintf(CH2,"AT+CMGS=\"");
+            fprintf(CH2,sms_phonenumber);
             
-            printf("\"");
-            putc('\n');
+            fprintf(CH2,"\"");
+            putc('\n',CH2);
             delay_ms(50);
            
-           printf(SMS_Massage8);  
-           putc('\n');
-           putc(26);
+           fprintf(CH2,SMS_Massage8);  
+           putc('\n',CH2);
+          putc(26,CH2);
          }
       }
       else
@@ -3189,7 +3193,7 @@ void Anal_Function(void)
 static unsigned char inputflag = 0;
 
 //input1
-   if((((Input.B1 ^ InputType.B1) == 1) && (FaultType.B1 == 0)) ||Test_fault==1)   // alarm1 occure and " Non Lock type"
+   if((((Inputt.B1 ^ InputType.B1) == 1) && (FaultType.B1 == 0)) ||Test_fault==1)   // alarm1 occure and " Non Lock type"
    {
       if(In2.B1 == 0 && AutoAck == 0x0F && Ack.B1 == 0)   //use auto acknowlegde
       {
@@ -3230,16 +3234,16 @@ static unsigned char inputflag = 0;
       if((SendSMS.B1 ==0) && (functointest_f ==0) && (Ack.B1 ==0))
       {
          SendSMS.B1 =1;
-         printf("AT+CMGS=\"");
-         printf(sms_phonenumber);
+         fprintf(CH2,"AT+CMGS=\"");
+         fprintf(CH2,sms_phonenumber);
          
-         printf("\"");
-         putc('\n');
+         fprintf(CH2,"\"");
+         putc('\n',CH2);
          delay_ms(50);
         
-        printf(SMS_Massage1);   
-        putc('\n');
-        putc(26);
+        fprintf(CH2,SMS_Massage1);   
+        putc('\n',CH2);
+       putc(26,CH2);
       }
    }
    else if(FaultType.B1 == 0)
@@ -3252,7 +3256,7 @@ static unsigned char inputflag = 0;
 
       if((OutputType.B1 == 1 || OutputBoth.B1 == 0)&& inputflag ==0)      //If Buzzer or Both
       {
-         if(CheckAutoReset(0x01) == 1);   //Check other Input "Ack" or not if not,do nothing
+         if(CheckAutoReset(0x01) == 1);   //Check other Inputt "Ack" or not if not,do nothing
          else
          {
             output_bit(Pbuzzer,1);   //Clear Buzzer
@@ -3277,7 +3281,7 @@ static unsigned char inputflag = 0;
    }
    ////////////////////////////////////////////////////////////////////////////////////////////////////
 //input2
-   if((((Input.B2 ^ InputType.B2) == 1) && (FaultType.B2 == 0))||Test_fault==1)    // alarm1 occure and " Non Lock type"
+   if((((Inputt.B2 ^ InputType.B2) == 1) && (FaultType.B2 == 0))||Test_fault==1)    // alarm1 occure and " Non Lock type"
    {
       if(In2.B2 == 0 && AutoAck == 0x0F && Ack.B2 == 0)   //use auto acknowlegde
       {
@@ -3318,16 +3322,16 @@ static unsigned char inputflag = 0;
       if((SendSMS.B2 ==0)&& (functointest_f ==0) && (Ack.B2 ==0))
       {
          SendSMS.B2 =1;
-         printf("AT+CMGS=\"");
-         printf(sms_phonenumber);
+         fprintf(CH2,"AT+CMGS=\"");
+         fprintf(CH2,sms_phonenumber);
          
-         printf("\"");
-         putc('\n');
+         fprintf(CH2,"\"");
+         putc('\n',CH2);
          delay_ms(50);
         
-        printf(SMS_Massage2); 
-        putc('\n');
-        putc(26);
+        fprintf(CH2,SMS_Massage2); 
+        putc('\n',CH2);
+       putc(26,CH2);
       }
    }
    else if(FaultType.B2 == 0)
@@ -3340,7 +3344,7 @@ static unsigned char inputflag = 0;
 
       if((OutputType.B2 == 1 || OutputBoth.B2 == 0)&& inputflag ==0)      //If Buzzer or Both
       {
-         if(CheckAutoReset(0x01) == 1);   //Check other Input "Ack" or not if not,do nothing
+         if(CheckAutoReset(0x01) == 1);   //Check other Inputt "Ack" or not if not,do nothing
          else
          {
             output_bit(Pbuzzer,1);   //Clear Buzzer
@@ -3365,7 +3369,7 @@ static unsigned char inputflag = 0;
    }
    ////////////////////////////////////////////////////////////////////////////////////////////////////
 //input3
-   if((((Input.B3 ^ InputType.B3) == 1) && (FaultType.B3 == 0)) ||Test_fault==1)   // alarm1 occure and " Non Lock type"
+   if((((Inputt.B3 ^ InputType.B3) == 1) && (FaultType.B3 == 0)) ||Test_fault==1)   // alarm1 occure and " Non Lock type"
    {
       if(In2.B3 == 0 && AutoAck == 0x0F && Ack.B3 == 0)   //use auto acknowlegde
       {
@@ -3406,16 +3410,16 @@ static unsigned char inputflag = 0;
       if((SendSMS.B3 ==0)&& (functointest_f ==0) && (Ack.B3 ==0))
       {
          SendSMS.B3 =1;
-         printf("AT+CMGS=\"");
-         printf(sms_phonenumber);
+         fprintf(CH2,"AT+CMGS=\"");
+         fprintf(CH2,sms_phonenumber);
          
-         printf("\"");
-         putc('\n');
+         fprintf(CH2,"\"");
+         putc('\n',CH2);
          delay_ms(50);
         
-        printf(SMS_Massage3); 
-        putc('\n');
-        putc(26);
+        fprintf(CH2,SMS_Massage3); 
+        putc('\n',CH2);
+       putc(26,CH2);
       }
    }
    else if(FaultType.B3 == 0)
@@ -3428,7 +3432,7 @@ static unsigned char inputflag = 0;
 
       if((OutputType.B3 == 1 || OutputBoth.B3 == 0)&& inputflag ==0)      //If Buzzer or Both
       {
-         if(CheckAutoReset(0x01) == 1);   //Check other Input "Ack" or not if not,do nothing
+         if(CheckAutoReset(0x01) == 1);   //Check other Inputt "Ack" or not if not,do nothing
          else
          {
             output_bit(Pbuzzer,1);   //Clear Buzzer
@@ -3453,7 +3457,7 @@ static unsigned char inputflag = 0;
    }
    ////////////////////////////////////////////////////////////////////////////////////////////////////
 //input4
-   if((((Input.B4 ^ InputType.B4) == 1) && (FaultType.B4 == 0))||Test_fault==1)    // alarm1 occure and " Non Lock type"
+   if((((Inputt.B4 ^ InputType.B4) == 1) && (FaultType.B4 == 0))||Test_fault==1)    // alarm1 occure and " Non Lock type"
    {
       if(In2.B4 == 0 && AutoAck == 0x0F && Ack.B4 == 0)   //use auto acknowlegde
       {
@@ -3494,16 +3498,16 @@ static unsigned char inputflag = 0;
       if((SendSMS.B4 ==0)&& (functointest_f ==0) && (Ack.B4 ==0))
       {
          SendSMS.B4 =1;
-         printf("AT+CMGS=\"");
-         printf(sms_phonenumber);
+         fprintf(CH2,"AT+CMGS=\"");
+         fprintf(CH2,sms_phonenumber);
          
-         printf("\"");
-         putc('\n');
+         fprintf(CH2,"\"");
+         putc('\n',CH2);
          delay_ms(50);
         
-        printf(SMS_Massage4); 
-        putc('\n');
-        putc(26);
+        fprintf(CH2,SMS_Massage4); 
+        putc('\n',CH2);
+       putc(26,CH2);
       }
    }
    else if(FaultType.B4 == 0)
@@ -3516,7 +3520,7 @@ static unsigned char inputflag = 0;
 
       if((OutputType.B4 == 1 || OutputBoth.B4 == 0)&& inputflag ==0)      //If Buzzer or Both
       {
-         if(CheckAutoReset(0x01) == 1);   //Check other Input "Ack" or not if not,do nothing
+         if(CheckAutoReset(0x01) == 1);   //Check other Inputt "Ack" or not if not,do nothing
          else
          {
             output_bit(Pbuzzer,1);   //Clear Buzzer
@@ -3541,7 +3545,7 @@ static unsigned char inputflag = 0;
    }
    ////////////////////////////////////////////////////////////////////////////////////////////////////
 //input5
-   if((((Input.B5 ^ InputType.B5) == 1) && (FaultType.B5 == 0))||Test_fault==1)    // alarm1 occure and " Non Lock type"
+   if((((Inputt.B5 ^ InputType.B5) == 1) && (FaultType.B5 == 0))||Test_fault==1)    // alarm1 occure and " Non Lock type"
    {
       if(In2.B5 == 0 && AutoAck == 0x0F && Ack.B5 == 0)   //use auto acknowlegde
       {
@@ -3582,16 +3586,16 @@ static unsigned char inputflag = 0;
       if((SendSMS.B5 ==0)&& (functointest_f ==0) && (Ack.B5 ==0))
       {
          SendSMS.B5 =1;
-         printf("AT+CMGS=\"");
-         printf(sms_phonenumber);
+         fprintf(CH2,"AT+CMGS=\"");
+         fprintf(CH2,sms_phonenumber);
          
-         printf("\"");
-         putc('\n');
+         fprintf(CH2,"\"");
+         putc('\n',CH2);
          delay_ms(50);
         
-        printf(SMS_Massage5); 
-        putc('\n');
-        putc(26);
+        fprintf(CH2,SMS_Massage5); 
+        putc('\n',CH2);
+       putc(26,CH2);
       }
    }
    else if(FaultType.B5 == 0)
@@ -3604,7 +3608,7 @@ static unsigned char inputflag = 0;
 
       if((OutputType.B5 == 1 || OutputBoth.B5 == 0)&& inputflag ==0)      //If Buzzer or Both
       {
-         if(CheckAutoReset(0x01) == 1);   //Check other Input "Ack" or not if not,do nothing
+         if(CheckAutoReset(0x01) == 1);   //Check other Inputt "Ack" or not if not,do nothing
          else
          {
             output_bit(Pbuzzer,1);   //Clear Buzzer
@@ -3629,7 +3633,7 @@ static unsigned char inputflag = 0;
    }
    ////////////////////////////////////////////////////////////////////////////////////////////////////
 //input6
-   if((((Input.B6 ^ InputType.B6) == 1) && (FaultType.B6 == 0))||Test_fault==1)    // alarm1 occure and " Non Lock type"
+   if((((Inputt.B6 ^ InputType.B6) == 1) && (FaultType.B6 == 0))||Test_fault==1)    // alarm1 occure and " Non Lock type"
    {
       if(In2.B6 == 0 && AutoAck == 0x0F && Ack.B6 == 0)   //use auto acknowlegde
       {
@@ -3670,16 +3674,16 @@ static unsigned char inputflag = 0;
       if((SendSMS.B6 ==0)&& (functointest_f ==0) && (Ack.B6 ==0))
       {
          SendSMS.B6 =1;
-         printf("AT+CMGS=\"");
-         printf(sms_phonenumber);
+         fprintf(CH2,"AT+CMGS=\"");
+         fprintf(CH2,sms_phonenumber);
          
-         printf("\"");
-         putc('\n');
+         fprintf(CH2,"\"");
+         putc('\n',CH2);
          delay_ms(50);
         
-        printf(SMS_Massage6);  
-        putc('\n');
-        putc(26);
+        fprintf(CH2,SMS_Massage6);  
+        putc('\n',CH2);
+       putc(26,CH2);
       }
    }
    else if(FaultType.B6 == 0)
@@ -3692,7 +3696,7 @@ static unsigned char inputflag = 0;
 
       if((OutputType.B6 == 1 || OutputBoth.B6 == 0)&& inputflag ==0)      //If Buzzer or Both
       {
-         if(CheckAutoReset(0x01) == 1);   //Check other Input "Ack" or not if not,do nothing
+         if(CheckAutoReset(0x01) == 1);   //Check other Inputt "Ack" or not if not,do nothing
          else
          {
             output_bit(Pbuzzer,1);   //Clear Buzzer
@@ -3717,7 +3721,7 @@ static unsigned char inputflag = 0;
    }
    ////////////////////////////////////////////////////////////////////////////////////////////////////
 //input7
-   if((((Input.B7 ^ InputType.B7) == 1) && (FaultType.B7 == 0))||Test_fault==1)    // alarm1 occure and " Non Lock type"
+   if((((Inputt.B7 ^ InputType.B7) == 1) && (FaultType.B7 == 0))||Test_fault==1)    // alarm1 occure and " Non Lock type"
    {
       if(In2.B7 == 0 && AutoAck == 0x0F && Ack.B7 == 0)   //use auto acknowlegde
       {
@@ -3758,16 +3762,16 @@ static unsigned char inputflag = 0;
       if((SendSMS.B7 ==0)&& (functointest_f ==0) && (Ack.B7 ==0))
       {
          SendSMS.B7 =1;
-         printf("AT+CMGS=\"");
-         printf(sms_phonenumber);
+         fprintf(CH2,"AT+CMGS=\"");
+         fprintf(CH2,sms_phonenumber);
          
-         printf("\"");
-         putc('\n');
+         fprintf(CH2,"\"");
+         putc('\n',CH2);
          delay_ms(50);
         
-        printf(SMS_Massage7);  
-        putc('\n');
-        putc(26);
+        fprintf(CH2,SMS_Massage7);  
+        putc('\n',CH2);
+       putc(26,CH2);
       }
    }
    else if(FaultType.B7 == 0)
@@ -3780,7 +3784,7 @@ static unsigned char inputflag = 0;
 
       if((OutputType.B7 == 1 || OutputBoth.B7 == 0)&& inputflag ==0)      //If Buzzer or Both
       {
-         if(CheckAutoReset(0x01) == 1);   //Check other Input "Ack" or not if not,do nothing
+         if(CheckAutoReset(0x01) == 1);   //Check other Inputt "Ack" or not if not,do nothing
          else
          {
             output_bit(Pbuzzer,1);   //Clear Buzzer
@@ -3805,7 +3809,7 @@ static unsigned char inputflag = 0;
    }
    ////////////////////////////////////////////////////////////////////////////////////////////////////
 //input8
-   if((((Input.B8 ^ InputType.B8) == 1) && (FaultType.B8 == 0)) ||Test_fault==1)   // alarm1 occure and " Non Lock type"
+   if((((Inputt.B8 ^ InputType.B8) == 1) && (FaultType.B8 == 0)) ||Test_fault==1)   // alarm1 occure and " Non Lock type"
    {
       if(In2.B8 == 0 && AutoAck == 0x0F && Ack.B8 == 0)   //use auto acknowlegde
       {
@@ -3846,16 +3850,16 @@ static unsigned char inputflag = 0;
       if((SendSMS.B8 ==0) && (functointest_f ==0) && (Ack.B8 ==0))
       {
          SendSMS.B8 =1;
-         printf("AT+CMGS=\"");
-         printf(sms_phonenumber);
+         fprintf(CH2,"AT+CMGS=\"");
+         fprintf(CH2,sms_phonenumber);
          
-         printf("\"");
-         putc('\n');
+         fprintf(CH2,"\"");
+         putc('\n',CH2);
          delay_ms(50);
         
-        printf(SMS_Massage8);   
-        putc('\n');
-        putc(26);
+        fprintf(CH2,SMS_Massage8);   
+        putc('\n',CH2);
+        putc(26,CH2);
       }
    }
    else if(FaultType.B8 == 0)
@@ -3868,7 +3872,7 @@ static unsigned char inputflag = 0;
 
       if((OutputType.B8 == 1 || OutputBoth.B8 == 0)&& inputflag ==0)      //If Buzzer or Both
       {
-         if(CheckAutoReset(0x01) == 1);   //Check other Input "Ack" or not if not,do nothing
+         if(CheckAutoReset(0x01) == 1);   //Check other Inputt "Ack" or not if not,do nothing
          else
          {
             output_bit(Pbuzzer,1);   //Clear Buzzer
@@ -4110,14 +4114,14 @@ void ForceAllAlarm(void)
    In.B7 = 1;
    In.B8 = 1;
       /*
-      Input.B1 = ~InputType.B1;
-      Input.B2 = ~InputType.B2;
-      Input.B3 = ~InputType.B3;
-      Input.B4 = ~InputType.B4;
-      Input.B5 = ~InputType.B5;
-      Input.B6 = ~InputType.B6;
-      Input.B7 = ~InputType.B7;
-      Input.B8 = ~InputType.B8;
+      Inputt.B1 = ~InputType.B1;
+      Inputt.B2 = ~InputType.B2;
+      Inputt.B3 = ~InputType.B3;
+      Inputt.B4 = ~InputType.B4;
+      Inputt.B5 = ~InputType.B5;
+      Inputt.B6 = ~InputType.B6;
+      Inputt.B7 = ~InputType.B7;
+      Inputt.B8 = ~InputType.B8;
       Ack.B1 = 0;
       Ack.B2 = 0;
       Ack.B3 = 0;
@@ -4304,14 +4308,14 @@ void check_reset(void)
     {
        AutoResetFlag = 0;
        
-       if((Input.B1 ^ InputType.B1) == 0 && In.B1 == 0) Output.B1 = 1;
-       if((Input.B2 ^ InputType.B2) == 0 && In.B2 == 0) Output.B2 = 1;
-       if((Input.B3 ^ InputType.B3) == 0 && In.B3 == 0) Output.B3 = 1;
-       if((Input.B4 ^ InputType.B4) == 0 && In.B4 == 0) Output.B4 = 1;
-       if((Input.B5 ^ InputType.B5) == 0 && In.B5 == 0) Output.B5 = 1;
-       if((Input.B6 ^ InputType.B6) == 0 && In.B6 == 0) Output.B6 = 1;
-       if((Input.B7 ^ InputType.B7) == 0 && In.B7 == 0) Output.B7 = 1;
-       if((Input.B8 ^ InputType.B8) == 0 && In.B8 == 0) Output.B8 = 1;
+       if((Inputt.B1 ^ InputType.B1) == 0 && In.B1 == 0) Output.B1 = 1;
+       if((Inputt.B2 ^ InputType.B2) == 0 && In.B2 == 0) Output.B2 = 1;
+       if((Inputt.B3 ^ InputType.B3) == 0 && In.B3 == 0) Output.B3 = 1;
+       if((Inputt.B4 ^ InputType.B4) == 0 && In.B4 == 0) Output.B4 = 1;
+       if((Inputt.B5 ^ InputType.B5) == 0 && In.B5 == 0) Output.B5 = 1;
+       if((Inputt.B6 ^ InputType.B6) == 0 && In.B6 == 0) Output.B6 = 1;
+       if((Inputt.B7 ^ InputType.B7) == 0 && In.B7 == 0) Output.B7 = 1;
+       if((Inputt.B8 ^ InputType.B8) == 0 && In.B8 == 0) Output.B8 = 1;
 
 
        Reset_F = 1;
@@ -4419,10 +4423,17 @@ void main()
   
    IO_INIT();   //initializes the MCP23S17 chip.//----------jj
   
-   IO_SET_TRIS_A(IO_DEVICE_0, 0xFF); //addr.0 Set PortA As Input
-   IO_SET_TRIS_B(IO_DEVICE_0, 0xFF); //addr.0 Set PortB As Input
-   IO_SET_TRIS_A(IO_DEVICE_1, 0xFF); //addr.1 Set PortA As Input 
-   IO_SET_TRIS_B(IO_DEVICE_1, 0xFF); //addr.1 Set PortB As Input 
+   IO_SET_TRIS_A(IO_DEVICE_0, 0xFF); //addr.0 Set PortA As Inputt
+   IO_SET_TRIS_B(IO_DEVICE_0, 0xFF); //addr.0 Set PortB As Inputt
+   IO_SET_TRIS_A(IO_DEVICE_1, 0xFF); //addr.1 Set PortA As Inputt 
+   IO_SET_TRIS_B(IO_DEVICE_1, 0xFF); //addr.1 Set PortB As Inputt 
+   
+   //  jj
+   IO_WRITE_REGISTER(IO_DEVICE_0, GPPUA, 0xFF); // Input Pullup
+   IO_WRITE_REGISTER(IO_DEVICE_0, GPPUB, 0xFF); // Input Pullup
+   IO_WRITE_REGISTER(IO_DEVICE_1, GPPUA, 0xFF); // Input Pullup
+   IO_WRITE_REGISTER(IO_DEVICE_1, GPPUB, 0xFF); // Input Pullup
+   //  jj
    IO_SET_TRIS_A(IO_DEVICE_2, 0x00); //addr.2 Set PortA As Output 
    IO_SET_TRIS_B(IO_DEVICE_2, 0x00); //addr.2 Set PortB As Output
    IO_SET_TRIS_A(IO_DEVICE_3, 0x00); //addr.3 Set PortA As Output 
@@ -4492,7 +4503,7 @@ void main()
       AutoAckTime = 5;
       FlashingRate = 25;
       NoOfPoint = 16;
-      FaultDelayTime = 0x00;
+      FlashingRateTime = 0x00;
 
 
       InputType.B1 = 1;
@@ -4644,28 +4655,28 @@ void main()
          switch(i)
          {
             case 1:
-               Input.B1 = 1; 
+               Inputt.B1 = 1; 
             break;
             case 2:
-               Input.B2 = 1; 
+               Inputt.B2 = 1; 
             break;
             case 3:
-               Input.B3 = 1; 
+               Inputt.B3 = 1; 
             break;
             case 4:
-               Input.B4 = 1; 
+               Inputt.B4 = 1; 
             break;
             case 5:
-               Input.B5 = 1; 
+               Inputt.B5 = 1; 
             break;
             case 6:
-               Input.B6 = 1; 
+               Inputt.B6 = 1; 
             break;
             case 7:
-               Input.B7 = 1; 
+               Inputt.B7 = 1; 
              break;
              case 8:
-               Input.B8 = 1; 
+               Inputt.B8 = 1; 
             break;
          
          }                 
@@ -4675,28 +4686,28 @@ void main()
          switch(i)
          {
             case 1:
-               Input.B1 = 0; 
+               Inputt.B1 = 0; 
             break;
             case 2:
-               Input.B2 = 0; 
+               Inputt.B2 = 0; 
             break;
             case 3:
-               Input.B3 = 0; 
+               Inputt.B3 = 0; 
             break;
             case 4:
-               Input.B4 = 0; 
+               Inputt.B4 = 0; 
             break;
             case 5:
-               Input.B5 = 0; 
+               Inputt.B5 = 0; 
             break;
             case 6:
-               Input.B6 = 0; 
+               Inputt.B6 = 0; 
             break;
             case 7:
-               Input.B7 = 0; 
+               Inputt.B7 = 0; 
              break;
              case 8:
-               Input.B8 = 0; 
+               Inputt.B8 = 0; 
             break;
       
          }                 
@@ -4704,8 +4715,8 @@ void main()
    }
    //GSM SIM900 Init
    delay_ms(1000);
-   printf("AT+CMGF=1"); 
-   putc('\n');
+   fprintf(CH2,"AT+CMGF=1"); 
+   putc('\n',CH2);
    delay_ms(50);
    
    SendSMS.B1 =0;
@@ -4750,7 +4761,7 @@ void main()
       Read_input(); restart_wdt(); //must be first
       Anal_Function(); restart_wdt();
       Send_Ouput(); restart_wdt();
-      Driver595(); restart_wdt();
+      //Driver595(); restart_wdt();
       
       output_toggle(PIN_A0);
       
@@ -4760,10 +4771,10 @@ void main()
          Read_Config();
          //IO_INIT();   //initializes the MCP23S17 chip.//----------jj
   
-         IO_SET_TRIS_A(IO_DEVICE_0, 0xFF); //addr.0 Set PortA As Input
-         IO_SET_TRIS_B(IO_DEVICE_0, 0xFF); //addr.0 Set PortB As Input
-         IO_SET_TRIS_A(IO_DEVICE_1, 0xFF); //addr.1 Set PortA As Input 
-         IO_SET_TRIS_B(IO_DEVICE_1, 0xFF); //addr.1 Set PortB As Input 
+         IO_SET_TRIS_A(IO_DEVICE_0, 0xFF); //addr.0 Set PortA As Inputt
+         IO_SET_TRIS_B(IO_DEVICE_0, 0xFF); //addr.0 Set PortB As Inputt
+         IO_SET_TRIS_A(IO_DEVICE_1, 0xFF); //addr.1 Set PortA As Inputt 
+         IO_SET_TRIS_B(IO_DEVICE_1, 0xFF); //addr.1 Set PortB As Inputt 
          IO_SET_TRIS_A(IO_DEVICE_2, 0x00); //addr.2 Set PortA As Output 
          IO_SET_TRIS_B(IO_DEVICE_2, 0x00); //addr.2 Set PortB As Output
          IO_SET_TRIS_A(IO_DEVICE_3, 0x00); //addr.3 Set PortA As Output 
