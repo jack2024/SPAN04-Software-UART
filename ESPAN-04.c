@@ -1,7 +1,7 @@
 
 //#include "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_16\ESPAN-04.h"
 #include "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_20 - Delay - SP - SMD - PIC18F252\ESPAN-04.h"
-#include "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_16\23S17.c" // 16 bit I/O Expander
+#include "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_20 - Delay - SP - SMD\23S17.c" // 16 bit I/O Expander
 
 #define Pled        PIN_B5
 #define I2C_SDA     PIN_C4
@@ -20,11 +20,11 @@
 
 //#define PsyncR      PIN_B3
 //#define PsyncS      PIN_B4
-
+/*
 #define EXP_OUT_ENABLE  PIN_B0
 #define EXP_OUT_CLOCK   PIN_B1
 #define EXP_OUT_DO      PIN_B2
-
+*/
 #define Red       0
 #define Green     1
 #define Ambian    2
@@ -199,7 +199,7 @@ int1 recieve_completed = 0;
 unsigned char sequence;         //keep sequence use for RxD
 unsigned char Address;
 unsigned char RxD_DataLen = 0x00;
-unsigned char TxD_Buff[255];
+unsigned char TxD_Buff[128];
 unsigned char RxD_Buff[1024];
 unsigned char CRC_Lo;
 unsigned char CRC_Hi;
@@ -208,7 +208,7 @@ int16 Send_check_Time = 500; //if no send reset buffer every 5 second
 int16 Start_Address = 0x0000;
 int16 No_PointCount = 0x0000;
 unsigned char Data_ByteCount = 0x00;
-unsigned char Data_Buff[255];
+unsigned char Data_Buff[100];
 //unsigned char DataTemp;
 //unsigned char TxD_DataLen;
 
@@ -290,12 +290,12 @@ struct Bit64 AlarmIndicator,Ack,In,In2;
 struct Bit64 LED_Colour,AckSend,RED_Colour,GREEN_Colour;
 struct Bit64 SendSMS;
 
-int1 FaultAgo[30];
-int1 FaultNow[30];
-int16 ReleaseTime[30];
-int16 FaultDelayTime[30];
-
-int1 FaultNCNO[17];
+int1 FaultAgo[20];
+int1 FaultNow[20];
+int16 ReleaseTime[20];
+int16 FaultDelayTime[20];
+int8  AllFaultDelayTime;
+int1 FaultNCNO[20];
 #define NO 1
 #define NC 0
 
@@ -331,6 +331,7 @@ void CRC(unsigned char *puchMsg , unsigned char usDataLen)
 }
 
 /********************************6B595 Driver*********************************/
+/*
 void Driver595()
 {
    Signed int8 j=0;
@@ -376,6 +377,7 @@ void Driver595()
    delay_us(1);
    output_low(EXP_OUT_ENABLE);
 }
+*/
 ////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -579,8 +581,7 @@ void Modbus_Function(void)
 
    if(CRC_Hi == RxD_Buff[RxD_DataLen - 1] && CRC_Lo == RxD_Buff[RxD_DataLen])
    {
-   
-         
+    
       if((RxD_Buff[0] == 0xAA)&&(RxD_Buff[1] == 0x20)) //Read Setting//0xAA Is Any Address 
       {
          TxD_Buff[0] = Address ;         //Address
@@ -1365,29 +1366,29 @@ void Modbus_Function(void)
             write_eeprom(0x19,RxD_Buff[27]);   //Auto acknowledge Time
             write_eeprom(0x1A,RxD_Buff[28]);   //Flashing Rate
             write_eeprom(0x1B,RxD_Buff[29]);   //No of point
-            write_eeprom(0x1C,RxD_Buff[30]);   //Master / Slave
+            write_eeprom(0x1C,RxD_Buff[30]);   //All Fault Delay Time
             write_eeprom(0x1D,RxD_Buff[31]);   //Communication Address
 
-            write_eeprom(0x1E,RxD_Buff[32]);   //Communication Address
-            write_eeprom(0x1F,RxD_Buff[33]);   //Communication Address
-            write_eeprom(0x20,RxD_Buff[34]);   //Communication Address
-            write_eeprom(0x21,RxD_Buff[35]);   //Communication Address
-            write_eeprom(0x22,RxD_Buff[36]);   //Communication Address
-            write_eeprom(0x23,RxD_Buff[37]);   //Communication Address
-            write_eeprom(0x24,RxD_Buff[38]);   //Communication Address
-            write_eeprom(0x25,RxD_Buff[39]);   //Communication Address
-            write_eeprom(0x26,RxD_Buff[40]);   //Communication Address
-            write_eeprom(0x27,RxD_Buff[41]);   //Communication Address
-            write_eeprom(0x28,RxD_Buff[42]);   //Communication Address
-            write_eeprom(0x29,RxD_Buff[43]);   //Communication Address
-            write_eeprom(0x2A,RxD_Buff[44]);   //Communication Address
-            write_eeprom(0x2B,RxD_Buff[45]);   //Communication Address
-            write_eeprom(0x2C,RxD_Buff[46]);   //Communication Address
-            write_eeprom(0x2D,RxD_Buff[47]);   //Communication Address
-            write_eeprom(0x2E,RxD_Buff[48]);   //Communication Address
-            write_eeprom(0x2F,RxD_Buff[49]);   //Communication Address
-            write_eeprom(0x30,RxD_Buff[50]);   //Communication Address
-            write_eeprom(0x31,RxD_Buff[51]);   //Communication Address
+            write_eeprom(0x1E,RxD_Buff[32]);   //Fault Delay Time
+            write_eeprom(0x1F,RxD_Buff[33]);   //Fault Delay Time
+            write_eeprom(0x20,RxD_Buff[34]);   //Fault Delay Time
+            write_eeprom(0x21,RxD_Buff[35]);   //Fault Delay Time
+            write_eeprom(0x22,RxD_Buff[36]);   //Fault Delay Time
+            write_eeprom(0x23,RxD_Buff[37]);   //Fault Delay Time
+            write_eeprom(0x24,RxD_Buff[38]);   //Fault Delay Time
+            write_eeprom(0x25,RxD_Buff[39]);   //Fault Delay Time
+            write_eeprom(0x26,RxD_Buff[40]);   //Fault Delay Time
+            write_eeprom(0x27,RxD_Buff[41]);   //Fault Delay Time
+            write_eeprom(0x28,RxD_Buff[42]);   //Fault Delay Time
+            write_eeprom(0x29,RxD_Buff[43]);   //Fault Delay Time
+            write_eeprom(0x2A,RxD_Buff[44]);   //Fault Delay Time
+            write_eeprom(0x2B,RxD_Buff[45]);   //Fault Delay Time
+            write_eeprom(0x2C,RxD_Buff[46]);   //Fault Delay Time
+            write_eeprom(0x2D,RxD_Buff[47]);   //Fault Delay Time
+            write_eeprom(0x2E,RxD_Buff[48]);   //Fault Delay Time
+            write_eeprom(0x2F,RxD_Buff[49]);   //Fault Delay Time
+            write_eeprom(0x30,RxD_Buff[50]);   //Fault Delay Time
+            write_eeprom(0x31,RxD_Buff[51]);   //Fault Delay Time
             
             int16  a = 0; 
             unsigned char  phonenum;
@@ -1409,21 +1410,7 @@ void Modbus_Function(void)
                }
             }
 
-            
-            /*
-            write_eeprom(0x32,RxD_Buff[52]);
-            write_eeprom(0x33,RxD_Buff[53]);
-            write_eeprom(0x34,RxD_Buff[54]);
-            write_eeprom(0x35,RxD_Buff[55]);
-            write_eeprom(0x36,RxD_Buff[56]);
-            write_eeprom(0x37,RxD_Buff[57]);
-            write_eeprom(0x38,RxD_Buff[58]);
-            write_eeprom(0x39,RxD_Buff[59]);
-            write_eeprom(0x3A,RxD_Buff[60]);
-            write_eeprom(0x3B,RxD_Buff[61]);
-            */
-            
-                
+                        
             TxD_Buff[0] = Address ;         //Address
             TxD_Buff[1] = 0x21 ;            //return function code
 
@@ -1661,32 +1648,7 @@ void Modbus_Function(void)
 
          }
        
-       /*-----JACK Comment 18/6/58----------//
-         else
-         {
-            //Invalid function
-            TxD_Buff[0] = Address ;         //Address
-            TxD_Buff[1] = 0x81 ;         //Function Code
-            TxD_Buff[2] = 0x01 ;         //illegal function
 
-            CRC(TxD_Buff,3)   ;            //Cal CRC 3 Byte
-
-            TxD_Buff[3] = CRC_Hi ;
-            TxD_Buff[4] = CRC_Lo ;
-
-            output_bit(P485ctrl,1);
-            delay_ms(10);
-
-            putc(Txd_Buff[0]);
-            putc(Txd_Buff[1]);
-            putc(Txd_Buff[2]);
-            putc(Txd_Buff[3]);
-            putc(Txd_Buff[4]);
-
-            delay_ms(3);
-            output_bit(P485ctrl,0);
-         }
-       *///-----JACK Comment----------//
       }  
 
       Send_check_Time = 500; //5 Second
@@ -1962,7 +1924,7 @@ void Read_Config(void)
    InputType.B6 = EEpDat >> 5;
    InputType.B7 = EEpDat >> 6;
    InputType.B8 = EEpDat >> 7;
-   
+
    FaultNCNO[1] = InputType.B1;
    FaultNCNO[2] = InputType.B2;
    FaultNCNO[3] = InputType.B3;
@@ -1971,8 +1933,7 @@ void Read_Config(void)
    FaultNCNO[6] = InputType.B6;
    FaultNCNO[7] = InputType.B7;
    FaultNCNO[8] = InputType.B8;
-
-
+  
    ////////////////////////////////////////
 
    EEpDat = read_eeprom(0x04);   // Fault type 1-8
@@ -2059,9 +2020,9 @@ void Read_Config(void)
 
    AutoAck = read_eeprom(0x18);          // Auto Acknoeledge
    AutoAckTime = read_eeprom(0x19);      // Auto Acknoeledge Time
-   FlashingRate = read_eeprom(0x1A); // Flashing rate
+   FlashingRateTime = FlashingRate = read_eeprom(0x1A); // Flashing rate
    NoOfPoint = read_eeprom(0x1B);        // Number of total point
-   FlashingRateTime = read_eeprom(0x1C);  // Master or slave sync(flashing)
+   AllFaultDelayTime = read_eeprom(0x1C);  // Master or slave sync(flashing)
 
    Address = read_eeprom(0x1D);          //Communication address
    
@@ -2362,9 +2323,9 @@ void TIMER2_isr(void)      //10ms
       {
          outmcp23 = 0xff;
          
-         if(SyncStatus == 0)
-         {
-            if(FlashingFlag == 1)
+         //if(SyncStatus == 0)
+         //{
+            if(FlashingFlag)
             {
                FlashingFlag = 0;
                //output_bit(PSyncS,0);
@@ -2375,7 +2336,7 @@ void TIMER2_isr(void)      //10ms
                FlashingFlag = 1;
                //output_bit(PSyncS,1);
             }
-         }
+         //}
          //FlashingFlag = ~FlashingFlag;
          FlashingRateTime = FlashingRate;      //reload value
       }
@@ -2426,10 +2387,8 @@ void Anal_Function(void)
             {
                Output.B1 = 1;
             }
-
             if (~AutoTestFlag)
             {
-               
                if(OutputBoth.B1 == 0)                  //Both output
                {
                   output_bit(Pbuzzer,0);   //Buzzer
@@ -2439,11 +2398,8 @@ void Anal_Function(void)
                {
                   if(OutputType.B1 == 1) output_bit(Pbuzzer,0);     //Buzzer
                   else output_bit(Pbell,0);                          //Bell
-               }
-               
-            }
-            
-            
+               }    
+            }  
             // SMS Sending   
             if((SendSMS.B1 ==0) && (functointest_f ==0) && (Ack.B1 ==0))
             {
@@ -2455,11 +2411,10 @@ void Anal_Function(void)
                fprintf(CH2,"AT+CMGS=\"");
                fprintf(CH2,sms_phonenumber);
                
-               fprintf(CH1,"\"");
+               fprintf(CH2,"\"");
                putc('\n',CH2);
                delay_ms(50);
               
-              //fprintf(CH2,"Fault No.1"); 
               fprintf(CH2,SMS_Massage1);
               putc('\n',CH2);
               putc(26,CH2);
@@ -2475,7 +2430,7 @@ void Anal_Function(void)
       {
          Output.B1 = 0;
          
-         /*
+         
          // SMS Sending   
          if((SendSMS.B1 ==0) && (functointest_f ==0) && (Ack.B1 ==0))
          {
@@ -2491,12 +2446,11 @@ void Anal_Function(void)
             putc('\n',CH2);
             delay_ms(50);
            
-           //fprintf(CH2,"Fault No.1");
            fprintf(CH2,SMS_Massage1);
            putc('\n',CH2);
           putc(26,CH2);
          }
-         */
+         
       }
       else
       {
@@ -3121,26 +3075,26 @@ void Anal_Function(void)
                
             }
        }
-       
+     
        // SMS Sending   
-            if((SendSMS.B8 ==0)&& (functointest_f ==0) && (Ack.B8 ==0))
-            {
-               fprintf(CH2,"AT+CMGF=1"); 
-               putc('\n',CH2);
-               delay_ms(10);
-               
-               SendSMS.B8 =1;
-               fprintf(CH2,"AT+CMGS=\"");
-               fprintf(CH2,sms_phonenumber);
-               
-               fprintf(CH2,"\"");
-               putc('\n',CH2);
-               delay_ms(50);
-              
-              printf(SMS_Massage8);  
-              putc('\n',CH2);
-             putc(26,CH2);
-            }
+         if((SendSMS.B8 ==0)&& (functointest_f ==0) && (Ack.B8 ==0))
+         {
+            fprintf(CH2,"AT+CMGF=1"); 
+            putc('\n',CH2);
+            delay_ms(10);
+            
+            SendSMS.B8 =1;
+            fprintf(CH2,"AT+CMGS=\"");
+            fprintf(CH2,sms_phonenumber);
+            
+            fprintf(CH2,"\"");
+            putc('\n',CH2);
+            delay_ms(50);
+           
+           printf(SMS_Massage8);  
+           putc('\n',CH2);
+          putc(26,CH2);
+         }
 
       }
       else if(FaultType.B8 == 1) Ack.B8 = 0;
@@ -4161,13 +4115,13 @@ void check_test(void)
                             
                  IO_OUTPUT_A(IO_DEVICE_3, 0xFF);
                  IO_OUTPUT_B(IO_DEVICE_3, 0xFF);
-                 
+  /*               
                  IO_OUTPUT_A(IO_DEVICE_4, 0xFF);
                  IO_OUTPUT_B(IO_DEVICE_4, 0xFF);
                            
                  IO_OUTPUT_A(IO_DEVICE_5, 0xFF);
                  IO_OUTPUT_B(IO_DEVICE_5, 0xFF);
-
+   */ 
              
            }
          
@@ -4391,36 +4345,9 @@ void main()
    //setup_vref(FALSE);
    enable_interrupts(INT_TIMER2);
    enable_interrupts(INT_RDA);
-   
-   //setup_oscillator(False);
-   
-
-   //  set_tris_c (0b01010111);
-   //setup_spi(SPI_MASTER | SPI_XMIT_L_TO_H |SPI_SS_DISABLED|SPI_H_TO_L  | SPI_CLK_DIV_4  );
-   //setup_spi(SPI_MASTER | SPI_H_TO_L  | SPI_CLK_DIV_4 |SPI_SS_DISABLED); // Initial SPI
-   //setup_spi(SPI_MASTER|SPI_H_TO_L|SPI_SS_DISABLED|SPI_CLK_DIV_16);
-   //setup_spi2( FALSE );
-   //setup_spi( FALSE );
-   
-  // setup_spi(SPI_MASTER |SPI_SS_DISABLED | SPI_L_TO_H | SPI_XMIT_L_TO_H| SPI_CLK_DIV_4 ); //masterOK
-   
+     
    setup_spi(SPI_MASTER  | SPI_L_TO_H | SPI_XMIT_L_TO_H| SPI_CLK_DIV_4 ); //master1
 
-    //setup_spi(SPI_MASTER | SPI_L_TO_H | SPI_XMIT_L_TO_H | SPI_CLK_DIV_4 ); //master2
-    //setup_spi(SPI_MASTER |SPI_SS_DISABLED |SPI_SAMPLE_AT_END | SPI_H_TO_L | SPI_XMIT_L_TO_H| SPI_CLK_DIV_4 ); //master1.1
-   //spi_init(SPI1_MODE0, TRUE);
-   //spi_init(250000);
-   //setup_spi(SPI_MASTER | SPI_XMIT_L_TO_H | SPI_CLK_DIV_4 );
-   //setup_spi(SPI_SS_DISABLED  | SPI_XMIT_L_TO_H | SPI_CLK_DIV_4 );
-   //setup_spi(SPI_MASTER | SPI_H_TO_L | SPI_CLK_T2 | SPI_XMIT_L_TO_H);
-   //setup_spi(SPI_MASTER | SPI_H_TO_L| SPI_SAMPLE_AT_END | SPI_CLK_DIV_64);//master3
-   //setup_spi(SPI_MASTER |SPI_SS_DISABLED| SPI_L_TO_H | SPI_SAMPLE_AT_END | SPI_CLK_DIV_4 );
-   //setup_spi(SPI_MASTER | SPI_L_TO_H | SPI_XMIT_L_TO_H | SPI_CLK_DIV_4);
-   //setup_spi(SPI_MASTER |SPI_SS_DISABLED | SPI_XMIT_L_TO_H| SPI_CLK_DIV_4 );
-   //setup_spi(SPI_MASTER | SPI_L_TO_H | SPI_CLK_DIV_4);
-   //setup_spi(SPI_MASTER | SPI_H_TO_L | SPI_CLK_DIV_16);
-   //setup_spi(SPI_MASTER |SPI_SS_DISABLED| spi_L_to_H| SPI_XMIT_L_TO_H|SPI_CLK_DIV_4 );
-  
    IO_INIT();   //initializes the MCP23S17 chip.//----------jj
   
    IO_SET_TRIS_A(IO_DEVICE_0, 0xFF); //addr.0 Set PortA As Inputt
@@ -4438,16 +4365,13 @@ void main()
    IO_SET_TRIS_B(IO_DEVICE_2, 0x00); //addr.2 Set PortB As Output
    IO_SET_TRIS_A(IO_DEVICE_3, 0x00); //addr.3 Set PortA As Output 
    IO_SET_TRIS_B(IO_DEVICE_3, 0x00); //addr.3 Set PortB As Output
-   IO_SET_TRIS_A(IO_DEVICE_4, 0x00); //addr.4 Set PortA As Output 
-   IO_SET_TRIS_B(IO_DEVICE_4, 0x00); //addr.4 Set PortB As Output 
-   IO_SET_TRIS_A(IO_DEVICE_5, 0x00); //addr.5 Set PortA As Output 
-   IO_SET_TRIS_B(IO_DEVICE_5, 0x00); //addr.5 Set PortB As Output
+
    
-   FlashingFlag = 1;
+   //FlashingFlag = 1;
    //output_bit(P485ctrl,0);
    sequence = end_sq;
-   Address = 1;
-
+   //Address = 1;
+   
    Output.B1 = 1;
    Output.B2 = 1;
    Output.B3 = 1;
@@ -4487,24 +4411,29 @@ void main()
    Ack.B6 = 0;
    Ack.B7 = 0;
    Ack.B8 = 0;
- 
+   
     /////// read setting //////////
 
-   if(read_eeprom(0x00) == 0x0F)
+   if(read_eeprom(0x00) == 0xF0)
    {
       Read_Config();
    }
    else
    {
       FlashingRateTime = 25;
+      FlashingRate = 25;
       AutoAck = 0xF0; //not use auto ack
       Address = 0x01;
 
       AutoAckTime = 5;
-      FlashingRate = 25;
-      NoOfPoint = 16;
-      FlashingRateTime = 0x00;
-
+      
+      NoOfPoint = 8;
+      //FlashingRateTime = 0x00;
+      char i;
+      for(i =0; i<=NoOfPoint; i++)
+      {
+         FaultDelayTime[i] = 0;
+      }
 
       InputType.B1 = 1;
       InputType.B2 = 1;
@@ -4610,10 +4539,11 @@ void main()
             
    IO_OUTPUT_A(IO_DEVICE_3, 0xff);
    IO_OUTPUT_B(IO_DEVICE_3, 0xff);
-   
-   
+   restart_wdt();
+   delay_ms(100);
+/*
    char loop;
-   for(loop=0;loop<=2;loop++)
+   for(loop=0;loop<=5;loop++)
    {
       
       IO_OUTPUT_A(IO_DEVICE_2, 0);
@@ -4621,29 +4551,18 @@ void main()
                 
       IO_OUTPUT_A(IO_DEVICE_3, 0);
       IO_OUTPUT_B(IO_DEVICE_3, 0);
-     
-      IO_OUTPUT_A(IO_DEVICE_4, 0);
-      IO_OUTPUT_B(IO_DEVICE_4, 0);
-               
-      IO_OUTPUT_A(IO_DEVICE_5, 0);
-      IO_OUTPUT_B(IO_DEVICE_5, 0);
-      delay_ms(200);
-      
+      delay(250);
       IO_OUTPUT_A(IO_DEVICE_2, 0xFF);
       IO_OUTPUT_B(IO_DEVICE_2, 0xFF);
                 
       IO_OUTPUT_A(IO_DEVICE_3, 0xFF);
       IO_OUTPUT_B(IO_DEVICE_3, 0xFF);
-     
-      IO_OUTPUT_A(IO_DEVICE_4, 0xFF);
-      IO_OUTPUT_B(IO_DEVICE_4, 0xFF);
-               
-      IO_OUTPUT_A(IO_DEVICE_5, 0xFF);
-      IO_OUTPUT_B(IO_DEVICE_5, 0xFF);
-      
-      delay_ms(200);
+  
    }
+*/
+
    // jj
+/*
    char i;
    for(i=1;i<=8;i++)
    {
@@ -4713,6 +4632,8 @@ void main()
          }                 
       }
    }
+   */
+   
    //GSM SIM900 Init
    delay_ms(1000);
    fprintf(CH2,"AT+CMGF=1"); 
@@ -4734,8 +4655,8 @@ void main()
       sms_phonenumber[m] = read_eeprom(0x32 + m);
    }
    sms_phonenumber[m] = '\0' ; // end string
-   
-   
+
+   delay_ms(500);
    while(TRUE)
    {
 
@@ -4775,17 +4696,18 @@ void main()
          IO_SET_TRIS_B(IO_DEVICE_0, 0xFF); //addr.0 Set PortB As Inputt
          IO_SET_TRIS_A(IO_DEVICE_1, 0xFF); //addr.1 Set PortA As Inputt 
          IO_SET_TRIS_B(IO_DEVICE_1, 0xFF); //addr.1 Set PortB As Inputt 
+         //  jj
+         IO_WRITE_REGISTER(IO_DEVICE_0, GPPUA, 0xFF); // Input Pullup
+         IO_WRITE_REGISTER(IO_DEVICE_0, GPPUB, 0xFF); // Input Pullup
+         IO_WRITE_REGISTER(IO_DEVICE_1, GPPUA, 0xFF); // Input Pullup
+         IO_WRITE_REGISTER(IO_DEVICE_1, GPPUB, 0xFF); // Input Pullup
+         //  jj
          IO_SET_TRIS_A(IO_DEVICE_2, 0x00); //addr.2 Set PortA As Output 
          IO_SET_TRIS_B(IO_DEVICE_2, 0x00); //addr.2 Set PortB As Output
          IO_SET_TRIS_A(IO_DEVICE_3, 0x00); //addr.3 Set PortA As Output 
          IO_SET_TRIS_B(IO_DEVICE_3, 0x00); //addr.3 Set PortB As Output
-         IO_SET_TRIS_A(IO_DEVICE_4, 0x00); //addr.4 Set PortA As Output 
-         IO_SET_TRIS_B(IO_DEVICE_4, 0x00); //addr.4 Set PortB As Output 
-         IO_SET_TRIS_A(IO_DEVICE_5, 0x00); //addr.5 Set PortA As Output 
-         IO_SET_TRIS_B(IO_DEVICE_5, 0x00); //addr.5 Set PortB As Output
-      }
-      
 
+      }
    }
    
 }

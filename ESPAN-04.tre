@@ -1,5 +1,5 @@
 ÀÄESPAN-04
-   ÃÄMAIN  0/2064  Ram=7
+   ÃÄMAIN  0/1536  Ram=6
    ³  ÃÄ@cinit1  (Inline)  Ram=0
    ³  ÃÄ@cinit2  (Inline)  Ram=0
    ³  ÃÄ@delay_ms1  0/48  Ram=1
@@ -32,16 +32,8 @@
    ³  ³  ÀÄ*
    ³  ÃÄIO_SET_TRIS_B  0/20  Ram=2
    ³  ³  ÀÄ*
-   ³  ÃÄIO_SET_TRIS_A  0/18  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_SET_TRIS_B  0/20  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_SET_TRIS_A  0/18  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_SET_TRIS_B  0/20  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄRead_Config  0/3048  Ram=13
-   ³  ÃÄRead_input  0/1628  Ram=5
+   ³  ÃÄRead_Config  0/3052  Ram=13
+   ³  ÃÄRead_input  0/1604  Ram=5
    ³  ³  ÃÄIO_INPUT_A  0/30  Ram=2
    ³  ³  ³  ÀÄIO_READ_REGISTER  0/56  Ram=4
    ³  ³  ÃÄIO_INPUT_B  0/30  Ram=2
@@ -50,21 +42,21 @@
    ³  ³  ÃÄ@READBITA  0/54  Ram=5
    ³  ³  ÃÄ@READBITA  0/54  Ram=5
    ³  ³  ÃÄ@MUL1616  0/34  Ram=5
-   ³  ³  ÃÄ@goto16517  0/42  Ram=0
+   ³  ³  ÃÄ@goto55595  0/42  Ram=0
    ³  ³  ÃÄ@READBITA  0/54  Ram=5
    ³  ³  ÃÄ@MUL1616  0/34  Ram=5
-   ³  ³  ÃÄ@goto16549  0/42  Ram=0
+   ³  ³  ÃÄ@goto55626  0/42  Ram=0
    ³  ³  ÃÄ@READBITA  0/54  Ram=5
    ³  ³  ÃÄ@READBITA  0/54  Ram=5
    ³  ³  ÃÄ@READBITA  0/54  Ram=5
    ³  ³  ÃÄ@MUL1616  0/34  Ram=5
-   ³  ³  ÃÄ@goto16588  0/42  Ram=0
+   ³  ³  ÃÄ@goto55662  0/42  Ram=0
    ³  ³  ÃÄ@READBITA  0/54  Ram=5
    ³  ³  ÃÄ@MUL1616  0/34  Ram=5
-   ³  ³  ÃÄ@goto16621  0/42  Ram=0
+   ³  ³  ÃÄ@goto55694  0/42  Ram=0
    ³  ³  ÀÄStoreReleaseFault  0/94  Ram=3
    ³  ³     ÃÄ@READBITA  0/54  Ram=5
-   ³  ³     ÀÄ@WRITEBITA  0/66  Ram=6
+   ³  ³     ÀÄ@WRITEBITA  0/68  Ram=6
    ³  ÃÄSend_Ouput  0/474  Ram=1
    ³  ³  ÃÄIO_OUTPUT_A  0/22  Ram=2
    ³  ³  ³  ÀÄIO_WRITE_REGISTER  0/50  Ram=4
@@ -82,50 +74,13 @@
    ³  ³  ÀÄ*
    ³  ÃÄIO_OUTPUT_B  0/22  Ram=2
    ³  ³  ÀÄ*
-   ³  ÃÄIO_OUTPUT_A  0/22  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_OUTPUT_B  0/22  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_OUTPUT_A  0/22  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_OUTPUT_B  0/22  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_OUTPUT_A  0/22  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_OUTPUT_B  0/22  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_OUTPUT_A  0/22  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_OUTPUT_B  0/22  Ram=2
-   ³  ³  ÀÄ*
    ³  ÃÄ@delay_ms1  0/48  Ram=1
-   ³  ÃÄIO_OUTPUT_A  0/22  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_OUTPUT_B  0/22  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_OUTPUT_A  0/22  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_OUTPUT_B  0/22  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_OUTPUT_A  0/22  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_OUTPUT_B  0/22  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_OUTPUT_A  0/22  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_OUTPUT_B  0/22  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄ@delay_ms1  0/48  Ram=1
-   ³  ÃÄ@WRITEBITA  0/66  Ram=6
-   ³  ÃÄ@WRITEBITA  0/66  Ram=6
-   ³  ÃÄ@READBITA  0/54  Ram=5
-   ³  ÃÄ@goto20740  0/42  Ram=0
-   ³  ÃÄ@goto20758  0/42  Ram=0
    ³  ÃÄ@delay_ms1  0/48  Ram=1
    ³  ÃÄ@PSTRINGC_826  0/32  Ram=2
    ³  ³  ÀÄ@PUTCHAR_2_  0/70  Ram=1
    ³  ÃÄ@PUTCHAR_2_  0/70  Ram=1
    ³  ÃÄ@delay_ms1  0/48  Ram=1
+   ³  ÃÄ@delay_ms1  0/48  Ram=1
    ³  ÃÄIO_OUTPUT_A  0/22  Ram=2
    ³  ³  ÀÄ*
    ³  ÃÄIO_OUTPUT_B  0/22  Ram=2
@@ -134,7 +89,7 @@
    ³  ³  ÀÄ*
    ³  ÃÄIO_OUTPUT_B  0/22  Ram=2
    ³  ³  ÀÄ*
-   ³  ÃÄModbus_Function  0/8400  Ram=12
+   ³  ÃÄModbus_Function  0/8446  Ram=12
    ³  ³  ÃÄCRC  0/86  Ram=5
    ³  ³  ³  ÃÄ@const971  0/272  Ram=0
    ³  ³  ³  ÀÄ@const974  0/272  Ram=0
@@ -288,7 +243,7 @@
    ³  ³  ÃÄ@PUTCHARI_BIU_1  0/8  Ram=0
    ³  ³  ÃÄ@PUTCHARI_BIU_1  0/8  Ram=0
    ³  ³  ÃÄ@delay_ms1  0/48  Ram=1
-   ³  ³  ÃÄRead_input  0/1628  Ram=5
+   ³  ³  ÃÄRead_input  0/1604  Ram=5
    ³  ³  ³  ÀÄ*
    ³  ³  ÃÄcheck_ack  0/228  Ram=3
    ³  ³  ³  ÀÄ@delay_ms1  0/48  Ram=1
@@ -318,7 +273,7 @@
    ³  ³  ÃÄ@PUTCHARI_BIU_1  0/8  Ram=0
    ³  ³  ÃÄ@PUTCHARI_BIU_1  0/8  Ram=0
    ³  ³  ÃÄ@delay_ms1  0/48  Ram=1
-   ³  ³  ÃÄRead_input  0/1628  Ram=5
+   ³  ³  ÃÄRead_input  0/1604  Ram=5
    ³  ³  ³  ÀÄ*
    ³  ³  ÃÄcheck_ack  0/228  Ram=3
    ³  ³  ³  ÀÄ*
@@ -379,7 +334,7 @@
    ³  ³  ÀÄ*
    ³  ÃÄcheck_reset  0/386  Ram=3
    ³  ³  ÀÄ*
-   ³  ÃÄcheck_test  0/254  Ram=11
+   ³  ÃÄcheck_test  0/198  Ram=11
    ³  ³  ÃÄ@delay_ms1  0/48  Ram=1
    ³  ³  ÃÄIO_OUTPUT_A  0/22  Ram=2
    ³  ³  ³  ÀÄ*
@@ -389,16 +344,8 @@
    ³  ³  ³  ÀÄ*
    ³  ³  ÃÄIO_OUTPUT_B  0/22  Ram=2
    ³  ³  ³  ÀÄ*
-   ³  ³  ÃÄIO_OUTPUT_A  0/22  Ram=2
-   ³  ³  ³  ÀÄ*
-   ³  ³  ÃÄIO_OUTPUT_B  0/22  Ram=2
-   ³  ³  ³  ÀÄ*
-   ³  ³  ÃÄIO_OUTPUT_A  0/22  Ram=2
-   ³  ³  ³  ÀÄ*
-   ³  ³  ÃÄIO_OUTPUT_B  0/22  Ram=2
-   ³  ³  ³  ÀÄ*
    ³  ³  ÃÄForceAllAlarm  0/24  Ram=0
-   ³  ³  ÀÄAnal_Function  0/6590  Ram=8
+   ³  ³  ÀÄAnal_Function  0/6894  Ram=8
    ³  ³     ÃÄ@PSTRINGC_826  0/32  Ram=2
    ³  ³     ³  ÀÄ*
    ³  ³     ÃÄ@PUTCHAR_2_  0/70  Ram=1
@@ -407,6 +354,36 @@
    ³  ³     ³  ÀÄ*
    ³  ³     ÃÄ@PSTRINGR_826  0/38  Ram=2
    ³  ³     ³  ÀÄ@PUTCHAR_2_  0/70  Ram=1
+   ³  ³     ÃÄ@PUTCHAR_2_  0/70  Ram=1
+   ³  ³     ÃÄ@PUTCHAR_2_  0/70  Ram=1
+   ³  ³     ÃÄ@delay_ms1  0/48  Ram=1
+   ³  ³     ÃÄ@PSTRINGR_826  0/38  Ram=2
+   ³  ³     ³  ÀÄ*
+   ³  ³     ÃÄ@PUTCHAR_2_  0/70  Ram=1
+   ³  ³     ÃÄ@PUTCHAR_2_  0/70  Ram=1
+   ³  ³     ÃÄ@PSTRINGC_826  0/32  Ram=2
+   ³  ³     ³  ÀÄ*
+   ³  ³     ÃÄ@PUTCHAR_2_  0/70  Ram=1
+   ³  ³     ÃÄ@delay_ms1  0/48  Ram=1
+   ³  ³     ÃÄ@PSTRINGC_826  0/32  Ram=2
+   ³  ³     ³  ÀÄ*
+   ³  ³     ÃÄ@PSTRINGR_826  0/38  Ram=2
+   ³  ³     ³  ÀÄ*
+   ³  ³     ÃÄ@PUTCHAR_2_  0/70  Ram=1
+   ³  ³     ÃÄ@PUTCHAR_2_  0/70  Ram=1
+   ³  ³     ÃÄ@delay_ms1  0/48  Ram=1
+   ³  ³     ÃÄ@PSTRINGR_826  0/38  Ram=2
+   ³  ³     ³  ÀÄ*
+   ³  ³     ÃÄ@PUTCHAR_2_  0/70  Ram=1
+   ³  ³     ÃÄ@PUTCHAR_2_  0/70  Ram=1
+   ³  ³     ÃÄ@PSTRINGC_826  0/32  Ram=2
+   ³  ³     ³  ÀÄ*
+   ³  ³     ÃÄ@PUTCHAR_2_  0/70  Ram=1
+   ³  ³     ÃÄ@delay_ms1  0/48  Ram=1
+   ³  ³     ÃÄ@PSTRINGC_826  0/32  Ram=2
+   ³  ³     ³  ÀÄ*
+   ³  ³     ÃÄ@PSTRINGR_826  0/38  Ram=2
+   ³  ³     ³  ÀÄ*
    ³  ³     ÃÄ@PUTCHAR_2_  0/70  Ram=1
    ³  ³     ÃÄ@PUTCHAR_2_  0/70  Ram=1
    ³  ³     ÃÄ@delay_ms1  0/48  Ram=1
@@ -713,13 +690,13 @@
    ³  ³     ÃÄ@PUTCHAR_2_  0/70  Ram=1
    ³  ³     ÃÄCheckAutoReset  0/1288  Ram=7
    ³  ³     ÀÄCheckAutoReset  0/1288  Ram=7
-   ³  ÃÄRead_input  0/1628  Ram=5
+   ³  ÃÄRead_input  0/1604  Ram=5
    ³  ³  ÀÄ*
-   ³  ÃÄAnal_Function  0/6590  Ram=8
+   ³  ÃÄAnal_Function  0/6894  Ram=8
    ³  ³  ÀÄ*
    ³  ÃÄSend_Ouput  0/474  Ram=1
    ³  ³  ÀÄ*
-   ³  ÃÄRead_Config  0/3048  Ram=13
+   ³  ÃÄRead_Config  0/3052  Ram=13
    ³  ÃÄIO_SET_TRIS_A  0/18  Ram=2
    ³  ³  ÀÄ*
    ³  ÃÄIO_SET_TRIS_B  0/20  Ram=2
@@ -728,14 +705,10 @@
    ³  ³  ÀÄ*
    ³  ÃÄIO_SET_TRIS_B  0/20  Ram=2
    ³  ³  ÀÄ*
-   ³  ÃÄIO_SET_TRIS_A  0/18  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_SET_TRIS_B  0/20  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_SET_TRIS_A  0/18  Ram=2
-   ³  ³  ÀÄ*
-   ³  ÃÄIO_SET_TRIS_B  0/20  Ram=2
-   ³  ³  ÀÄ*
+   ³  ÃÄIO_WRITE_REGISTER  0/50  Ram=4
+   ³  ÃÄIO_WRITE_REGISTER  0/50  Ram=4
+   ³  ÃÄIO_WRITE_REGISTER  0/50  Ram=4
+   ³  ÃÄIO_WRITE_REGISTER  0/50  Ram=4
    ³  ÃÄIO_SET_TRIS_A  0/18  Ram=2
    ³  ³  ÀÄ*
    ³  ÃÄIO_SET_TRIS_B  0/20  Ram=2
@@ -745,5 +718,5 @@
    ³  ÀÄIO_SET_TRIS_B  0/20  Ram=2
    ³     ÀÄ*
    ÃÄRDA_isr  0/16  Ram=0
-   ³  ÀÄcheckCommand  0/602  Ram=2
-   ÀÄTIMER2_isr  0/148  Ram=1
+   ³  ÀÄcheckCommand  0/572  Ram=2
+   ÀÄTIMER2_isr  0/144  Ram=1
