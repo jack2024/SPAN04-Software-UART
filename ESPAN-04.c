@@ -120,7 +120,6 @@ int8 FaultType1_8;
 int8 FaultType9_16;
 int8 FaultType17_24;
 
-
 int8 OutputType1_8;
 int8 OutputType9_16;
 int8 OutputType17_24;

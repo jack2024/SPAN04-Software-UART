@@ -36,7 +36,7 @@ t7=1
 Count=2
 
 [ProjectLog]
-Days=8
+Days=9
 D1=25-11-2015
 D1_L=16
 D1_L1=[45582]Project Opened.
@@ -80,7 +80,7 @@ D5_L4=[32357]Started Editing.
 D5_L5=[32657]Stopped Editing.
 D5_L6=[32908]Started Editing.
 D5_L7=[33721]Stopped Editing.
-TotalEdit=88
+TotalEdit=89
 TotalDebug=0
 D5_E=9
 D5_D=0
@@ -173,6 +173,16 @@ D8_L27=[61551]Stopped Editing.
 D8_E=41
 D8_D=0
 D8_L28=[62249]Project Closed.
+D9=09-09-2021
+D9_L=6
+D9_L1=[30949]Project Opened.
+D9_L2=[32958]Started Editing.
+D9_L3=[32982]Stopped Editing.
+D9_E=1
+D9_D=0
+D9_L4=[32982]Project Closed.
+D9_L5=[33007]Project Opened.
+D9_L6=[33073]Project Closed.
 
 [Directories]
 Include=C:\Program Files (x86)\PICC\Drivers\;C:\Program Files (x86)\PICC\Devices\
