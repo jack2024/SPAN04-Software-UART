@@ -191,14 +191,14 @@ volatile int1 RefreshConfigData =0;
 //int1 RxDreceive = 0;
 
 //////////////////////////////////////
-unsigned char const addr_sq = 0x10,end_sq = 0x11,code_sq = 0x12,start_addr_hi_sq = 0x13,start_addr_lo_sq = 0x14;         //serial sequnce
-unsigned char const ubyte_hi_sq = 0x15,ubyte_lo_sq = 0x16,crc_hi_sq = 0x17,byte_count_sq = 0x19,data_sq = 0x20;      //serial sequnce
+unsigned char const addr_sq = 0x10, end_sq = 0x11, code_sq = 0x12, start_addr_hi_sq = 0x13, start_addr_lo_sq = 0x14;         //serial sequnce
+unsigned char const ubyte_hi_sq = 0x15, ubyte_lo_sq = 0x16, crc_hi_sq = 0x17,second_numofdata = 0x18, byte_count_sq = 0x19, data_sq = 0x20;      //serial sequnce
 
 int1 recieve_completed = 0;
 unsigned char sequence;         //keep sequence use for RxD
 unsigned char Address;
 unsigned char RxD_DataLen = 0x00;
-unsigned char TxD_Buff[128];
+unsigned char TxD_Buff[255];
 unsigned char RxD_Buff[1024];
 unsigned char CRC_Lo;
 unsigned char CRC_Hi;
@@ -446,9 +446,10 @@ void Alarmtosend(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-
+int8 count_bytecount =0;
 void checkCommand(void)
 {
+   
    restart_wdt();
 
    if(sequence == end_sq )     //check Address
@@ -458,6 +459,7 @@ void checkCommand(void)
      restart_wdt();
      RxD_DataLen ++ ;
      sequence = addr_sq;
+     count_bytecount =0; // bytecount = 2 Byte //jj10092564
      T_timeout = 0x14; //200ms
    }
    else if(sequence == addr_sq)
@@ -483,7 +485,13 @@ void checkCommand(void)
        }
        else if(RxD_Buff[RxD_DataLen - 1] == 0x22)   /////SMS setting/////
        {
-          sequence = byte_count_sq ;
+          if(count_bytecount ==0){ // bytecount first Byte
+            count_bytecount++;
+          }
+          else{ // bytecount Second Byte
+            sequence = byte_count_sq ;
+          }
+
           T_timeout = 0x14; //200ms
        }
        else                           // Invalid Code
@@ -499,6 +507,15 @@ void checkCommand(void)
       RxD_Buff[RxD_DataLen] = SBUF ;      //Byte 3   Data Byte Count
       restart_wdt();
       RxD_DataLen ++ ;
+      /*
+      if(RxD_Buff[1] == 0x22)   /////SMS setting/////
+      {
+         index = (RxD_Buff[2]*100) + RxD_Buff[3];
+      }
+      else{
+         index = RxD_Buff[RxD_DataLen - 1] ;    //Data Byte Count
+      }
+      */
       index = RxD_Buff[RxD_DataLen - 1] ;    //Data Byte Count
       T_timeout = 0x14; //200ms
       sequence = data_sq ;
@@ -509,7 +526,7 @@ void checkCommand(void)
       restart_wdt();
       RxD_DataLen ++ ;
       index -- ;                     //Data Byte Count
-      if(index == 0x00)
+      if(index == 0x01)
       {
          sequence = ubyte_lo_sq ;      //next CRC
       }
@@ -1436,7 +1453,7 @@ void Modbus_Function(void)
          else if(RxD_Buff[1] == 0x22)///////////// WRITE Faultname /////////////////////
          {
             //SMS_Massage
-            int16  i =3,j=0,k=0;
+            int16  i =4,j=0,k=0; //i =4 are first data from RxD_Buff[]
             for(; ; i++,j++)
             {
                restart_wdt();
@@ -2634,7 +2651,7 @@ void Anal_Function(void)
       {
          Output.B3 = 1;
          SendSMS.B3 =0;
-		 functointest_f =0;
+       functointest_f =0;
       }
    }
 ///////////////////////////////////////////////////////////////////////////////
@@ -2731,7 +2748,7 @@ void Anal_Function(void)
       {
          Output.B4 = 1;
          SendSMS.B4 =0;
-		 functointest_f =0;
+       functointest_f =0;
       }
    }
 ///////////////////////////////////////////////////////////////////////////////
@@ -2828,7 +2845,7 @@ void Anal_Function(void)
       {
          Output.B5 = 1;
          SendSMS.B5 =0;
-		 functointest_f =0;
+       functointest_f =0;
       }
    }
 ///////////////////////////////////////////////////////////////////////////////
@@ -2925,7 +2942,7 @@ void Anal_Function(void)
       {
          Output.B6 = 1;
          SendSMS.B6 =0;
-		 functointest_f =0;
+       functointest_f =0;
       }
    }
 ///////////////////////////////////////////////////////////////////////////////
@@ -3022,7 +3039,7 @@ void Anal_Function(void)
       {
          Output.B7 = 1;
          SendSMS.B7 =0;
-		 functointest_f =0;
+       functointest_f =0;
       }
    }
 ///////////////////////////////////////////////////////////////////////////////
@@ -3119,7 +3136,7 @@ void Anal_Function(void)
       {
          Output.B8 = 1;
          SendSMS.B8 =0;
-		 functointest_f =0;
+       functointest_f =0;
       }
    }
 ///////////////////////////////////////////////////////////////////////////////
@@ -4099,11 +4116,11 @@ void check_test(void)
              if(T_test == 0) T_test = 0x06;    //3 second for time base 500 ms
               Test = 1;
         
-			 IO_OUTPUT_A(IO_DEVICE_2, 0xFF);
-			 IO_OUTPUT_B(IO_DEVICE_2, 0xFF);
-						
-			 IO_OUTPUT_A(IO_DEVICE_3, 0xFF);
-			 IO_OUTPUT_B(IO_DEVICE_3, 0xFF);
+          IO_OUTPUT_A(IO_DEVICE_2, 0xFF);
+          IO_OUTPUT_B(IO_DEVICE_2, 0xFF);
+                  
+          IO_OUTPUT_A(IO_DEVICE_3, 0xFF);
+          IO_OUTPUT_B(IO_DEVICE_3, 0xFF);
              
            }
          
@@ -4473,27 +4490,27 @@ void main()
       AlarmIndicator.B8 = 1;
 
       ///////////// JACK///////////////////
-	   EEpDat = read_eeprom(0x10);
-	   //Red1_8 = EEpDat;
-	   RED_Colour.B1 = EEpDat;
-	   RED_Colour.B2 = EEpDat >> 1;
-	   RED_Colour.B3 = EEpDat >> 2;
-	   RED_Colour.B4 = EEpDat >> 3;
-	   RED_Colour.B5 = EEpDat >> 4;
-	   RED_Colour.B6 = EEpDat >> 5;
-	   RED_Colour.B7 = EEpDat >> 6;
-	   RED_Colour.B8 = EEpDat >> 7;
-		  
-	   EEpDat = read_eeprom(0x14);
-	   //Green1_8 = EEpDat;
-	   GREEN_Colour.B1 = EEpDat;
-	   GREEN_Colour.B2 = EEpDat >> 1;
-	   GREEN_Colour.B3 = EEpDat >> 2;
-	   GREEN_Colour.B4 = EEpDat >> 3;
-	   GREEN_Colour.B5 = EEpDat >> 4;
-	   GREEN_Colour.B6 = EEpDat >> 5;
-	   GREEN_Colour.B7 = EEpDat >> 6;
-	   GREEN_Colour.B8 = EEpDat >> 7;
+      EEpDat = read_eeprom(0x10);
+      //Red1_8 = EEpDat;
+      RED_Colour.B1 = EEpDat;
+      RED_Colour.B2 = EEpDat >> 1;
+      RED_Colour.B3 = EEpDat >> 2;
+      RED_Colour.B4 = EEpDat >> 3;
+      RED_Colour.B5 = EEpDat >> 4;
+      RED_Colour.B6 = EEpDat >> 5;
+      RED_Colour.B7 = EEpDat >> 6;
+      RED_Colour.B8 = EEpDat >> 7;
+        
+      EEpDat = read_eeprom(0x14);
+      //Green1_8 = EEpDat;
+      GREEN_Colour.B1 = EEpDat;
+      GREEN_Colour.B2 = EEpDat >> 1;
+      GREEN_Colour.B3 = EEpDat >> 2;
+      GREEN_Colour.B4 = EEpDat >> 3;
+      GREEN_Colour.B5 = EEpDat >> 4;
+      GREEN_Colour.B6 = EEpDat >> 5;
+      GREEN_Colour.B7 = EEpDat >> 6;
+      GREEN_Colour.B8 = EEpDat >> 7;
    
    ///////////// JACK/////////////////////////////////////
       

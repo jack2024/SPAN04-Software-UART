@@ -1,24 +1,24 @@
 
-ROM used:   27522/65536 (42%)
-            27522/65536 (42%) including unused fragments
+ROM used:   27568/65536 (42%)
+            27568/65536 (42%) including unused fragments
 
-            4.0 Average locations per line
+            4.1 Average locations per line
             9.3 Average locations per statement
 
-RAM used:   1845/3896 (47%) at main() level
-            1862/3896 (48%) worst case
+RAM used:   2898/3896 (74%) at main() level
+            2915/3896 (75%) worst case
 
 Stack used: 4 worst case (3 in main + 1 for interrupts)
 Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
- 4714  2842  96  ESPAN-04.c
+ 4617  2853  96  ESPAN-04.c
    63     0   0  ..\ESPAN04_20 - Delay - SP - SMD - PIC18F252\ESPAN-04.h
  1022     0   0  C:\Program Files (x86)\PICC\Devices\18F26K22.h
  1032   110   4  ..\ESPAN04_20 - Delay - SP - SMD\23S17.c
 ----- -----
- 6831  2952 Total
+ 6734  2963 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -34,60 +34,59 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0     20   0    2     74  0.6  IO_SET_TRIS_B
 0      8   0    0             @PUTCHARI_BIU_1
 0     70   0    1             @PUTCHAR_2_
-0    272   0    0             @const971
-0    272   0    0             @const974
+0    272   0    0             @const972
+0    272   0    0             @const975
 0     94   0    3    131  3.5  StoreReleaseFault
 0     54   0    5             @READBITA
 0     68   0    6             @WRITEBITA
 0     86   0    5    357  6.6  CRC
 0    426   1    2   3072  5.4  Alarmtosend
-0    572   1    2   2912  6.4  checkCommand
-0   8446  15   12  50651 11.0  Modbus_Function
-0   1604   3    5   6604 11.4  Read_input
+0    616   1    2   3041  6.4  checkCommand
+0   8400  15   12  50651 11.0  Modbus_Function
+0   1628   3    5   6604 11.4  Read_input
 0     34   0    5             @MUL1616
-0     42   0    0             @goto55595
-0     42   0    0             @goto55626
-0     42   0    0             @goto55662
-0     42   0    0             @goto55694
+0     42   0    0             @goto8075
+0     42   0    0             @goto8105
+0     42   0    0             @goto8142
+0     42   0    0             @goto8172
 0   3052   6   13  11791  8.5  Read_Config
 0     16   0    0     35  1.6  RDA_isr
 0    144   0    1   1311  5.8  TIMER2_isr
-0   6894  13    8  68058  6.5  Anal_Function
-0     10   0    0             @const1045
+0   6906  13    8  68370  6.5  Anal_Function
+0     10   0    0             @const1047
 0     32   0    2             @PSTRINGC_826
-0     10   0    0             @const1050
+0     10   0    0             @const1052
 0     38   0    2             @PSTRINGR_826
-0     10   0    0             @const1053
-0     10   0    0             @const1054
+0     10   0    0             @const1055
 0     10   0    0             @const1056
-0     10   0    0             @const1057
+0     10   0    0             @const1058
 0     10   0    0             @const1059
-0     10   0    0             @const1060
+0     10   0    0             @const1061
 0     10   0    0             @const1062
-0     10   0    0             @const1063
+0     10   0    0             @const1064
 0     10   0    0             @const1065
-0     10   0    0             @const1066
+0     10   0    0             @const1067
 0     10   0    0             @const1068
-0     10   0    0             @const1069
+0     10   0    0             @const1070
 0     10   0    0             @const1071
-0     10   0    0             @const1072
+0     10   0    0             @const1073
 0     10   0    0             @const1074
-0     10   0    0             @const1075
+0     10   0    0             @const1076
 0     10   0    0             @const1077
-0     10   0    0             @const1078
+0     10   0    0             @const1079
 0     10   0    0             @const1080
-0     10   0    0             @const1081
+0     10   0    0             @const1082
 0     10   0    0             @const1083
-0     10   0    0             @const1084
+0     10   0    0             @const1085
 0     10   0    0             @const1086
-0     10   0    0             @const1087
+0     10   0    0             @const1088
 0     10   0    0             @const1089
-0     10   0    0             @const1090
+0     10   0    0             @const1091
 0     10   0    0             @const1092
-0     10   0    0             @const1093
+0     10   0    0             @const1094
 0     10   0    0             @const1095
-0     10   0    0             @const1096
-0     10   0    0             @const1099
+0     10   0    0             @const1097
+0     10   0    0             @const1098
 0     10   0    0             @const1101
 0     10   0    0             @const1103
 0     10   0    0             @const1105
@@ -95,34 +94,35 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0     10   0    0             @const1109
 0     10   0    0             @const1111
 0     10   0    0             @const1113
+0     10   0    0             @const1115
 0    474   1    1   7057  5.0  Send_Ouput
 0     24   0    0    255  2.3  ForceAllAlarm
 0    198   0   11   1318  5.9  check_test
 0    228   0    3   3556  5.4  check_ack
 0    386   1    3   1802  5.4  check_reset
 0   1288   2    7   3677  5.9  CheckAutoReset
-0   1536   3    6  10752  9.0  MAIN
-0     10   0    0             @const1122
+0   1548   3    6  10752  9.0  MAIN
+0     10   0    0             @const1124
  Inline         0             @cinit1
 
 Program metrics:
     Functions               26
-    Statements              2952
-    Comments                1764
-    Volume (V)              226254
+    Statements              2963
+    Comments                1667
+    Volume (V)              226813
     Difficulty (D)          126.5
-    Effort to implement (E) 28627509
-    Time to implement (T)   441 hours, 47 minutes
+    Effort to implement (E) 28699223
+    Time to implement (T)   442 hours, 53 minutes
     Est Delivered Bugs (B)  31
-    Cyclomatic Complexity   456
-    Maintainability (MI)    53
+    Cyclomatic Complexity   457
+    Maintainability (MI)    35
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-00006     0  4  
 00008-000B8   178  0  
-000BA-0FFFE  27340  38010  
+000BA-0FFFE  27386  37964  
 
 
 
