@@ -207,7 +207,7 @@ int16 Send_check_Time = 500; //if no send reset buffer every 5 second
 int16 Start_Address = 0x0000;
 int16 No_PointCount = 0x0000;
 unsigned char Data_ByteCount = 0x00;
-unsigned char Data_Buff[100];
+unsigned char Data_Buff[1024];
 //unsigned char DataTemp;
 //unsigned char TxD_DataLen;
 
@@ -481,7 +481,7 @@ void checkCommand(void)
           sequence = byte_count_sq ;
           T_timeout = 0x14; //200ms
        }
-       else if(RxD_Buff[RxD_DataLen - 1] == 0x22)   /////Write setting/////
+       else if(RxD_Buff[RxD_DataLen - 1] == 0x22)   /////SMS setting/////
        {
           sequence = byte_count_sq ;
           T_timeout = 0x14; //200ms
@@ -1368,26 +1368,26 @@ void Modbus_Function(void)
             write_eeprom(0x1C,RxD_Buff[30]);   //All Fault Delay Time
             write_eeprom(0x1D,RxD_Buff[31]);   //Communication Address
 
-            write_eeprom(0x1E,RxD_Buff[32]);   //Fault Delay Time
-            write_eeprom(0x1F,RxD_Buff[33]);   //Fault Delay Time
-            write_eeprom(0x20,RxD_Buff[34]);   //Fault Delay Time
-            write_eeprom(0x21,RxD_Buff[35]);   //Fault Delay Time
-            write_eeprom(0x22,RxD_Buff[36]);   //Fault Delay Time
-            write_eeprom(0x23,RxD_Buff[37]);   //Fault Delay Time
-            write_eeprom(0x24,RxD_Buff[38]);   //Fault Delay Time
-            write_eeprom(0x25,RxD_Buff[39]);   //Fault Delay Time
-            write_eeprom(0x26,RxD_Buff[40]);   //Fault Delay Time
-            write_eeprom(0x27,RxD_Buff[41]);   //Fault Delay Time
-            write_eeprom(0x28,RxD_Buff[42]);   //Fault Delay Time
-            write_eeprom(0x29,RxD_Buff[43]);   //Fault Delay Time
-            write_eeprom(0x2A,RxD_Buff[44]);   //Fault Delay Time
-            write_eeprom(0x2B,RxD_Buff[45]);   //Fault Delay Time
-            write_eeprom(0x2C,RxD_Buff[46]);   //Fault Delay Time
-            write_eeprom(0x2D,RxD_Buff[47]);   //Fault Delay Time
-            write_eeprom(0x2E,RxD_Buff[48]);   //Fault Delay Time
-            write_eeprom(0x2F,RxD_Buff[49]);   //Fault Delay Time
-            write_eeprom(0x30,RxD_Buff[50]);   //Fault Delay Time
-            write_eeprom(0x31,RxD_Buff[51]);   //Fault Delay Time
+            write_eeprom(0x1E,RxD_Buff[32]);   //Fault Delay Time1
+            write_eeprom(0x1F,RxD_Buff[33]);   //Fault Delay Time2
+            write_eeprom(0x20,RxD_Buff[34]);   //Fault Delay Time3
+            write_eeprom(0x21,RxD_Buff[35]);   //Fault Delay Time4
+            write_eeprom(0x22,RxD_Buff[36]);   //Fault Delay Time5
+            write_eeprom(0x23,RxD_Buff[37]);   //Fault Delay Time6
+            write_eeprom(0x24,RxD_Buff[38]);   //Fault Delay Time7
+            write_eeprom(0x25,RxD_Buff[39]);   //Fault Delay Time8
+            write_eeprom(0x26,RxD_Buff[40]);   //Fault Delay Time9
+            write_eeprom(0x27,RxD_Buff[41]);   //Fault Delay Time10
+            write_eeprom(0x28,RxD_Buff[42]);   //Fault Delay Time11
+            write_eeprom(0x29,RxD_Buff[43]);   //Fault Delay Time12
+            write_eeprom(0x2A,RxD_Buff[44]);   //Fault Delay Time13
+            write_eeprom(0x2B,RxD_Buff[45]);   //Fault Delay Time14
+            write_eeprom(0x2C,RxD_Buff[46]);   //Fault Delay Time15
+            write_eeprom(0x2D,RxD_Buff[47]);   //Fault Delay Time16
+            write_eeprom(0x2E,RxD_Buff[48]);   //Fault Delay Time17
+            write_eeprom(0x2F,RxD_Buff[49]);   //Fault Delay Time18
+            write_eeprom(0x30,RxD_Buff[50]);   //Fault Delay Time19
+            write_eeprom(0x31,RxD_Buff[51]);   //Fault Delay Time20
             
             int16  a = 0; 
             unsigned char  phonenum;
@@ -2063,16 +2063,6 @@ void Read_Config(void)
          sms_phonenumber[a] = phonenum;
       }
    }
-
-   /*
-   char b;
-   for(b=0; b<10; b++)
-   {
-      sms_phonenumber[b] = read_eeprom(0x32 + b);
-   }
-   sms_phonenumber[b] = '\0' ; // end string
-   */
-
    
    int16  i =3,j=0,k=0 , buff;
    for(; ; i++,j++)
@@ -2239,9 +2229,6 @@ void Read_Config(void)
 #int_RDA
 void RDA_isr(void)
 {
-
-   //Data = getc();
-   //putc(Data);
    SBUF = getc();
    checkCommand();
 }
@@ -2647,6 +2634,7 @@ void Anal_Function(void)
       {
          Output.B3 = 1;
          SendSMS.B3 =0;
+		 functointest_f =0;
       }
    }
 ///////////////////////////////////////////////////////////////////////////////
@@ -2743,6 +2731,7 @@ void Anal_Function(void)
       {
          Output.B4 = 1;
          SendSMS.B4 =0;
+		 functointest_f =0;
       }
    }
 ///////////////////////////////////////////////////////////////////////////////
@@ -2839,6 +2828,7 @@ void Anal_Function(void)
       {
          Output.B5 = 1;
          SendSMS.B5 =0;
+		 functointest_f =0;
       }
    }
 ///////////////////////////////////////////////////////////////////////////////
@@ -2935,6 +2925,7 @@ void Anal_Function(void)
       {
          Output.B6 = 1;
          SendSMS.B6 =0;
+		 functointest_f =0;
       }
    }
 ///////////////////////////////////////////////////////////////////////////////
@@ -3031,6 +3022,7 @@ void Anal_Function(void)
       {
          Output.B7 = 1;
          SendSMS.B7 =0;
+		 functointest_f =0;
       }
    }
 ///////////////////////////////////////////////////////////////////////////////
@@ -3127,6 +3119,7 @@ void Anal_Function(void)
       {
          Output.B8 = 1;
          SendSMS.B8 =0;
+		 functointest_f =0;
       }
    }
 ///////////////////////////////////////////////////////////////////////////////
@@ -3832,7 +3825,6 @@ static unsigned char inputflag = 0;
          }
       }
 
-
       if((OutputType.B8 == 0 || OutputBoth.B8 == 0)&& inputflag ==0)  //If Bell or Both
       {
          if(CheckAutoReset(0x02) == 1);
@@ -4106,21 +4098,12 @@ void check_test(void)
              restart_wdt();
              if(T_test == 0) T_test = 0x06;    //3 second for time base 500 ms
               Test = 1;
-              //if(NoOfPoint >= 16)
-             // {
-             
-                 IO_OUTPUT_A(IO_DEVICE_2, 0xFF);
-                 IO_OUTPUT_B(IO_DEVICE_2, 0xFF);
-                            
-                 IO_OUTPUT_A(IO_DEVICE_3, 0xFF);
-                 IO_OUTPUT_B(IO_DEVICE_3, 0xFF);
-  /*               
-                 IO_OUTPUT_A(IO_DEVICE_4, 0xFF);
-                 IO_OUTPUT_B(IO_DEVICE_4, 0xFF);
-                           
-                 IO_OUTPUT_A(IO_DEVICE_5, 0xFF);
-                 IO_OUTPUT_B(IO_DEVICE_5, 0xFF);
-   */ 
+        
+			 IO_OUTPUT_A(IO_DEVICE_2, 0xFF);
+			 IO_OUTPUT_B(IO_DEVICE_2, 0xFF);
+						
+			 IO_OUTPUT_A(IO_DEVICE_3, 0xFF);
+			 IO_OUTPUT_B(IO_DEVICE_3, 0xFF);
              
            }
          
@@ -4379,8 +4362,6 @@ void main()
    Output.B6 = 1;
    Output.B7 = 1;
    Output.B8 = 1;
-
-   
    ////////////////////
    In.B1 = 0;
    In.B2 = 0;
@@ -4389,9 +4370,7 @@ void main()
    In.B5 = 0;
    In.B6 = 0;
    In.B7 = 0;
-   In.B8 = 0;
-
-   
+   In.B8 = 0;  
    ////////////////////
    In2.B1 = 0;
    In2.B2 = 0;
@@ -4493,29 +4472,28 @@ void main()
       AlarmIndicator.B7 = 1;
       AlarmIndicator.B8 = 1;
 
-      
       ///////////// JACK///////////////////
-   EEpDat = read_eeprom(0x10);
-   //Red1_8 = EEpDat;
-   RED_Colour.B1 = EEpDat;
-   RED_Colour.B2 = EEpDat >> 1;
-   RED_Colour.B3 = EEpDat >> 2;
-   RED_Colour.B4 = EEpDat >> 3;
-   RED_Colour.B5 = EEpDat >> 4;
-   RED_Colour.B6 = EEpDat >> 5;
-   RED_Colour.B7 = EEpDat >> 6;
-   RED_Colour.B8 = EEpDat >> 7;
-      
-   EEpDat = read_eeprom(0x14);
-   //Green1_8 = EEpDat;
-   GREEN_Colour.B1 = EEpDat;
-   GREEN_Colour.B2 = EEpDat >> 1;
-   GREEN_Colour.B3 = EEpDat >> 2;
-   GREEN_Colour.B4 = EEpDat >> 3;
-   GREEN_Colour.B5 = EEpDat >> 4;
-   GREEN_Colour.B6 = EEpDat >> 5;
-   GREEN_Colour.B7 = EEpDat >> 6;
-   GREEN_Colour.B8 = EEpDat >> 7;
+	   EEpDat = read_eeprom(0x10);
+	   //Red1_8 = EEpDat;
+	   RED_Colour.B1 = EEpDat;
+	   RED_Colour.B2 = EEpDat >> 1;
+	   RED_Colour.B3 = EEpDat >> 2;
+	   RED_Colour.B4 = EEpDat >> 3;
+	   RED_Colour.B5 = EEpDat >> 4;
+	   RED_Colour.B6 = EEpDat >> 5;
+	   RED_Colour.B7 = EEpDat >> 6;
+	   RED_Colour.B8 = EEpDat >> 7;
+		  
+	   EEpDat = read_eeprom(0x14);
+	   //Green1_8 = EEpDat;
+	   GREEN_Colour.B1 = EEpDat;
+	   GREEN_Colour.B2 = EEpDat >> 1;
+	   GREEN_Colour.B3 = EEpDat >> 2;
+	   GREEN_Colour.B4 = EEpDat >> 3;
+	   GREEN_Colour.B5 = EEpDat >> 4;
+	   GREEN_Colour.B6 = EEpDat >> 5;
+	   GREEN_Colour.B7 = EEpDat >> 6;
+	   GREEN_Colour.B8 = EEpDat >> 7;
    
    ///////////// JACK/////////////////////////////////////
       
@@ -4540,98 +4518,7 @@ void main()
    IO_OUTPUT_B(IO_DEVICE_3, 0xff);
    restart_wdt();
    delay_ms(100);
-/*
-   char loop;
-   for(loop=0;loop<=5;loop++)
-   {
-      
-      IO_OUTPUT_A(IO_DEVICE_2, 0);
-      IO_OUTPUT_B(IO_DEVICE_2, 0);
-                
-      IO_OUTPUT_A(IO_DEVICE_3, 0);
-      IO_OUTPUT_B(IO_DEVICE_3, 0);
-      delay(250);
-      IO_OUTPUT_A(IO_DEVICE_2, 0xFF);
-      IO_OUTPUT_B(IO_DEVICE_2, 0xFF);
-                
-      IO_OUTPUT_A(IO_DEVICE_3, 0xFF);
-      IO_OUTPUT_B(IO_DEVICE_3, 0xFF);
-  
-   }
-*/
 
-   // jj
-/*
-   char i;
-   for(i=1;i<=8;i++)
-   {
-      FaultAgo[i] = 0;
-      FaultNow[i] = 0;
-      ReleaseTime[i] = 0;
-      if(FaultNCNO[i] ==NO)
-      {
-         switch(i)
-         {
-            case 1:
-               Inputt.B1 = 1; 
-            break;
-            case 2:
-               Inputt.B2 = 1; 
-            break;
-            case 3:
-               Inputt.B3 = 1; 
-            break;
-            case 4:
-               Inputt.B4 = 1; 
-            break;
-            case 5:
-               Inputt.B5 = 1; 
-            break;
-            case 6:
-               Inputt.B6 = 1; 
-            break;
-            case 7:
-               Inputt.B7 = 1; 
-             break;
-             case 8:
-               Inputt.B8 = 1; 
-            break;
-         
-         }                 
-      }
-      else
-      {
-         switch(i)
-         {
-            case 1:
-               Inputt.B1 = 0; 
-            break;
-            case 2:
-               Inputt.B2 = 0; 
-            break;
-            case 3:
-               Inputt.B3 = 0; 
-            break;
-            case 4:
-               Inputt.B4 = 0; 
-            break;
-            case 5:
-               Inputt.B5 = 0; 
-            break;
-            case 6:
-               Inputt.B6 = 0; 
-            break;
-            case 7:
-               Inputt.B7 = 0; 
-             break;
-             case 8:
-               Inputt.B8 = 0; 
-            break;
-      
-         }                 
-      }
-   }
-   */
    
    //GSM SIM900 Init
    delay_ms(1000);
