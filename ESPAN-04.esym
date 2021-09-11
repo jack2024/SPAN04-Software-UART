@@ -1,10 +1,10 @@
-C L "MAIN" 0 332 1 "FUNCTION"
-D G "__PCH__" 0 4618 ""5.091""
-D G "__DEVICE__" 0 4618 "2622"
-D G "__DATE__" 0 4618 ""10-Sep-21""
-D G "__TIME__" 0 4618 ""16:32:01""
-D G "_UNICODE" 0 4618 ""?""
-D G "__EVAL" 0 4618 ""?"" "#include "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_16\ESPAN-04.h""
+F N "jobESP" 0 195 ""
+D G "__PCH__" 0 195 ""5.091""
+D G "__DEVICE__" 0 195 "2622"
+D G "__DATE__" 0 195 ""11-Sep-21""
+D G "__TIME__" 0 195 ""20:40:18""
+D G "_UNICODE" 0 195 ""?""
+D G "__EVAL" 0 195 ""?"" "#include "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_16\ESPAN-04.h""
 c L "set_tris_a" 2 1 6 "FUNCTION"
 f N "set_tris_a" 2 45 ""
 v L "value" 2 45 "int8" `55 
@@ -1444,9 +1444,9 @@ d G "INT_RB4" 2 1016 "0x110F208"
 d G "INT_RB5" 2 1017 "0x120F208"
 d G "INT_RB6" 2 1018 "0x140F208"
 d G "INT_RB7" 2 1019 "0x180F208"
-D G "CLOCK_SP" 1 32 "16000000" "Clock Speed 20MHz"
-D G "IO_MULTIPLE_DEVICES" 1 35 ""
-D G "IO_CS_PIN" 1 36 "PIN_A5"
+D G "CLOCK_SP" 1 34 "16000000" "Clock Speed 20MHz"
+D G "IO_MULTIPLE_DEVICES" 1 37 ""
+D G "IO_CS_PIN" 1 38 "PIN_A5"
 C L "jump_to_isr" 1 3 18 "FUNCTION"
 D G "MCP23S17" 3 147 ""
 D G "IO_DEVICE_ADDRESS_READ" 3 158 "0b01000001"
@@ -1837,7 +1837,7 @@ V G "FlashingRate" 0 182 "int8" `927
 V G "NoOfPoint" 0 183 "int8" `928 
 V G "MasterSlaveSync" 0 184 "int8" `929 
 V G "RefreshConfigData" 0 186 "int1" `930 
-C L "Read_input" 0 21 3 "FUNCTION"
+C L "Read_input" 0 21 4 "FUNCTION"
 V G "addr_sq" 0 194 "int8" `931 
 V G "end_sq" 0 194 "int8" `933 
 V G "code_sq" 0 194 "int8" `934 
@@ -1856,7 +1856,7 @@ V G "sequence" 0 198 "int8" `945  "keep sequence use for RxD"
 V G "address" 0 199 "int8" `946 
 V G "RxD_DataLen" 0 200 "int8" `947 
 V G "TxD_Buff" 0 201 "int8[255]" `948 
-V G "RxD_Buff" 0 202 "int8[1024]" `949 
+V G "RxD_Buff" 0 202 "int8[512]" `949 
 V G "CRC_Lo" 0 203 "int8" `950 
 V G "CRC_Hi" 0 204 "int8" `951 
 V G "Send_check_Time" 0 205 "int16" `952 
@@ -1864,23 +1864,23 @@ C L "Read_input" 0 21 1 "FUNCTION"
 V G "Start_Address" 0 207 "int16" `953 
 V G "No_PointCount" 0 208 "int16" `954 
 V G "Data_ByteCount" 0 209 "int8" `955 
-V G "Data_Buff" 0 210 "int8[1024]" `956  "unsigned char DataTemp;"
+V G "Data_Buff" 0 210 "int8[512]" `956  "unsigned char DataTemp;"
 C L "Read_input" 0 21 1 "FUNCTION"
 V G "MCP23s17_Ip_dat" 0 214 "int8" `957 
 V G "MCP23s17_Op_dat" 0 216 "int8" `958 
 V G "T_timeout" 0 218 "int8" `959  "use for calculate RxD timeout"
-V G "index" 0 219 "int8" `960 
+V G "index" 0 219 "int16" `960 
 C L "Read_input" 0 21 1 "FUNCTION"
 V G "outmcp23" 0 221 "int8" `961 
 V G "sms_phonenumber" 0 223 "int8[15]" `962  "unsigned char SMS_Massage[20][20];"
-V G "SMS_Massage1" 0 227 "int8[41]" `963 
-V G "SMS_Massage2" 0 228 "int8[41]" `964 
-V G "SMS_Massage3" 0 229 "int8[41]" `965 
-V G "SMS_Massage4" 0 230 "int8[41]" `966 
-V G "SMS_Massage5" 0 231 "int8[41]" `967 
-V G "SMS_Massage6" 0 232 "int8[41]" `968 
-V G "SMS_Massage7" 0 233 "int8[41]" `969 
-V G "SMS_Massage8" 0 234 "int8[41]" `970 
+V G "SMS_Massage1" 0 227 "int8[32]" `963 
+V G "SMS_Massage2" 0 228 "int8[32]" `964 
+V G "SMS_Massage3" 0 229 "int8[32]" `965 
+V G "SMS_Massage4" 0 230 "int8[32]" `966 
+V G "SMS_Massage5" 0 231 "int8[32]" `967 
+V G "SMS_Massage6" 0 232 "int8[32]" `968 
+V G "SMS_Massage7" 0 233 "int8[32]" `969 
+V G "SMS_Massage8" 0 234 "int8[32]" `970 
 V G "CRC_Table_Hi" 0 236 "[1]" `972 
 V G "CRC_Table_Lo" 0 257 "[1]" `975 
 C L "Read_input" 0 21 1 "FUNCTION"
@@ -1945,7 +1945,7 @@ C L "checkCommand" 0 332 1 "FUNCTION"
 C L "checkCommand" 0 332 1 "FUNCTION"
 C L "checkCommand" 0 332 1 "FUNCTION"
 C L "checkCommand" 0 332 1 "FUNCTION"
-C L "checkCommand" 0 332 4 "FUNCTION"
+C L "checkCommand" 0 332 1 "FUNCTION"
 C L "checkCommand" 0 332 1 "FUNCTION"
 C L "checkCommand" 0 332 1 "FUNCTION"
 C L "checkCommand" 0 332 1 "FUNCTION"
@@ -1965,8 +1965,8 @@ C L "checkCommand" 0 332 1 "FUNCTION"
 C L "checkCommand" 0 332 1 "FUNCTION"
 C L "checkCommand" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
-F N "Modbus_Function" 0 593 ""
-F G "Modbus_Function" 0 594 "void()" `1024 
+F N "Modbus_Function" 0 599 ""
+F G "Modbus_Function" 0 600 "void()" `1024 
 C L "Modbus_Function" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
@@ -2209,24 +2209,17 @@ C L "Modbus_Function" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
-V L "a" 0 1409 "int16" `1025 
-V L "phonenum" 0 1410 "int8" `1026 
+V L "a" 0 1416 "int16" `1025 
+V L "phonenum" 0 1417 "int8" `1026 
 C L "Modbus_Function" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
-V L "i" 0 1456 "int16" `1027 
-V L "j" 0 1456 "int16" `1028 
-V L "k" 0 1456 "int16" `1029 
-C L "Modbus_Function" 0 332 1 "FUNCTION"
-C L "Modbus_Function" 0 332 1 "FUNCTION"
-C L "Modbus_Function" 0 332 1 "FUNCTION"
-C L "Modbus_Function" 0 332 1 "FUNCTION"
-C L "Modbus_Function" 0 332 1 "FUNCTION"
-C L "Modbus_Function" 0 332 1 "FUNCTION"
-C L "Modbus_Function" 0 332 1 "FUNCTION"
+V L "i" 0 1464 "int16" `1027 
+V L "j" 0 1464 "int16" `1028 
+V L "k" 0 1464 "int16" `1029 
 C L "Modbus_Function" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
@@ -2245,14 +2238,22 @@ C L "Modbus_Function" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
 C L "Modbus_Function" 0 332 1 "FUNCTION"
-F N "Read_input" 0 1683 ""
-F G "Read_input" 0 1684 "void()" `836  "if(NoOfPoint >= 10)"
+C L "Modbus_Function" 0 332 1 "FUNCTION"
+C L "Modbus_Function" 0 332 1 "FUNCTION"
+C L "Modbus_Function" 0 332 1 "FUNCTION"
+C L "Modbus_Function" 0 332 1 "FUNCTION"
+C L "Modbus_Function" 0 332 1 "FUNCTION"
+C L "Modbus_Function" 0 332 1 "FUNCTION"
+C L "Modbus_Function" 0 332 1 "FUNCTION"
+C L "Modbus_Function" 0 332 1 "FUNCTION"
+F N "Read_input" 0 1691 ""
+F G "Read_input" 0 1692 "void()" `836  "if(NoOfPoint >= 10)"
 C L "Read_input" 0 332 2 "FUNCTION"
 C L "Read_input" 0 332 1 "FUNCTION"
 C L "Read_input" 0 332 1 "FUNCTION"
 C L "Read_input" 0 332 1 "FUNCTION"
 C L "Read_input" 0 332 1 "FUNCTION"
-V L "i" 0 1719 "int8" `1030 
+V L "i" 0 1727 "int8" `1030 
 C L "Read_input" 0 332 1 "FUNCTION"
 C L "Read_input" 0 332 1 "FUNCTION"
 C L "Read_input" 0 332 1 "FUNCTION"
@@ -2260,8 +2261,8 @@ C L "Read_input" 0 332 1 "FUNCTION"
 C L "Read_input" 0 332 1 "FUNCTION"
 C L "Read_input" 0 332 1 "FUNCTION"
 C L "Read_Config" 0 332 2 "FUNCTION"
-F N "Read_Config" 0 1928 ""
-F G "Read_Config" 0 1929 "void()" `834 
+F N "Read_Config" 0 1936 ""
+F G "Read_Config" 0 1937 "void()" `834 
 C L "Read_Config" 0 332 1 "FUNCTION"
 C L "Read_Config" 0 332 1 "FUNCTION"
 C L "Read_Config" 0 332 1 "FUNCTION"
@@ -2275,12 +2276,12 @@ C L "Read_Config" 0 332 1 "FUNCTION"
 C L "Read_Config" 0 332 1 "FUNCTION"
 C L "Read_Config" 0 332 1 "FUNCTION"
 C L "Read_Config" 0 332 1 "FUNCTION"
-V L "a" 0 2066 "int8" `1038 
-V L "phonenum" 0 2067 "int8" `1039 
-V L "i" 0 2084 "int16" `1040 
-V L "j" 0 2084 "int16" `1041 
-V L "k" 0 2084 "int16" `1042 
-V L "buff" 0 2084 "int16" `1043 
+V L "a" 0 2074 "int8" `1038 
+V L "phonenum" 0 2075 "int8" `1039 
+V L "i" 0 2092 "int16" `1040 
+V L "j" 0 2092 "int16" `1041 
+V L "k" 0 2092 "int16" `1042 
+V L "buff" 0 2092 "int16" `1043 
 C L "Read_Config" 0 332 1 "FUNCTION"
 C L "Read_Config" 0 332 1 "FUNCTION"
 C L "Read_Config" 0 332 1 "FUNCTION"
@@ -2289,13 +2290,11 @@ C L "Read_Config" 0 332 1 "FUNCTION"
 C L "Read_Config" 0 332 1 "FUNCTION"
 C L "Read_Config" 0 332 1 "FUNCTION"
 C L "Read_Config" 0 332 1 "FUNCTION"
-F N "RDA_isr" 0 2247 ""
-F G "RDA_isr" 0 2248 "void()" `1044 
-F N "TIMER2_isr" 0 2254 ""
+F N "RDA_isr" 0 2255 ""
+F G "RDA_isr" 0 2256 "void()" `1044 
+F N "TIMER2_isr" 0 2262 ""
 C L "TIMER2_isr" 0 332 1 "FUNCTION"
-F G "TIMER2_isr" 0 2255 "void()" `1045 
-C L "TIMER2_isr" 0 332 1 "FUNCTION"
-C L "TIMER2_isr" 0 332 1 "FUNCTION"
+F G "TIMER2_isr" 0 2263 "void()" `1045 
 C L "TIMER2_isr" 0 332 1 "FUNCTION"
 C L "TIMER2_isr" 0 332 1 "FUNCTION"
 C L "TIMER2_isr" 0 332 1 "FUNCTION"
@@ -2307,9 +2306,8 @@ C L "TIMER2_isr" 0 332 1 "FUNCTION"
 C L "TIMER2_isr" 0 332 1 "FUNCTION"
 C L "TIMER2_isr" 0 332 1 "FUNCTION"
 C L "TIMER2_isr" 0 332 1 "FUNCTION"
-C L "TIMER2_isr" 0 332 1 "FUNCTION"
-F N "Anal_Function" 0 2360 ""
-F G "Anal_Function" 0 2361 "void()" `1046  "MANUAL RESET /////////////////////////////////"
+F N "Anal_Function" 0 2368 ""
+F G "Anal_Function" 0 2369 "void()" `1046  "MANUAL RESET /////////////////////////////////"
 C L "Anal_Function" 0 332 2 "FUNCTION"
 C L "Anal_Function" 0 332 1 "FUNCTION"
 C L "Anal_Function" 0 332 2 "FUNCTION"
@@ -2431,7 +2429,7 @@ C L "Anal_Function" 0 332 1 "FUNCTION"
 C L "Anal_Function" 0 332 1 "FUNCTION"
 C L "Anal_Function" 0 332 1 "FUNCTION"
 C L "Anal_Function" 0 332 3 "FUNCTION"
-V L "inputflag" 0 3156 "int8" `1100 
+V L "inputflag" 0 3164 "int8" `1100 
 C L "Anal_Function" 0 332 1 "FUNCTION"
 C L "Anal_Function" 0 332 1 "FUNCTION"
 C L "Anal_Function" 0 332 1 "FUNCTION"
@@ -2600,8 +2598,8 @@ C L "Anal_Function" 0 332 1 "FUNCTION"
 C L "Anal_Function" 0 332 1 "FUNCTION"
 C L "Anal_Function" 0 332 1 "FUNCTION"
 C L "Anal_Function" 0 332 1 "FUNCTION"
-F N "Send_Ouput" 0 3867 ""
-F G "Send_Ouput" 0 3868 "void()" `1117 
+F N "Send_Ouput" 0 3875 ""
+F G "Send_Ouput" 0 3876 "void()" `1117 
 C L "Send_Ouput" 0 332 2 "FUNCTION"
 C L "Send_Ouput" 0 332 2 "FUNCTION"
 C L "Send_Ouput" 0 332 1 "FUNCTION"
@@ -2645,17 +2643,17 @@ C L "Send_Ouput" 0 332 1 "FUNCTION"
 C L "Send_Ouput" 0 332 1 "FUNCTION"
 C L "Send_Ouput" 0 332 1 "FUNCTION"
 C L "Send_Ouput" 0 332 1 "FUNCTION"
-F N "ForceAllAlarm" 0 4068 ""
-F G "ForceAllAlarm" 0 4069 "void()" `835 
+F N "ForceAllAlarm" 0 4076 ""
+F G "ForceAllAlarm" 0 4077 "void()" `835 
 C L "ForceAllAlarm" 0 332 16 "FUNCTION"
 C L "check_test" 0 332 1 "FUNCTION"
-F N "check_test" 0 4103 ""
-F G "check_test" 0 4104 "void()" `830 
-V L "output_temp" 0 4105 "int8[8]" `1118 
+F N "check_test" 0 4111 ""
+F G "check_test" 0 4112 "void()" `830 
+V L "output_temp" 0 4113 "int8[8]" `1118 
 C L "check_test" 0 332 1 "FUNCTION"
 C L "check_ack" 0 332 1 "FUNCTION"
-F N "check_ack" 0 4161 ""
-F G "check_ack" 0 4162 "void()" `829 
+F N "check_ack" 0 4169 ""
+F G "check_ack" 0 4170 "void()" `829 
 C L "check_ack" 0 332 1 "FUNCTION"
 C L "check_ack" 0 332 1 "FUNCTION"
 C L "check_ack" 0 332 1 "FUNCTION"
@@ -2668,17 +2666,17 @@ C L "check_ack" 0 332 1 "FUNCTION"
 C L "check_ack" 0 332 1 "FUNCTION"
 C L "check_ack" 0 332 1 "FUNCTION"
 C L "check_reset" 0 332 1 "FUNCTION"
-F N "check_reset" 0 4257 ""
-F G "check_reset" 0 4258 "void()" `831 
+F N "check_reset" 0 4265 ""
+F G "check_reset" 0 4266 "void()" `831 
 C L "CheckAutoReset" 0 332 1 "FUNCTION"
-F N "CheckAutoReset" 0 4289 ""
-V L "DatType" 0 4289 "int8" `1120 
-F G "CheckAutoReset" 0 4290 "int8(int8 DatType)" `832 
-V L "check" 0 4291 "int1" `1119  "/ "1" = true  //Other Alarm active or not "ACK""
+F N "CheckAutoReset" 0 4297 ""
+V L "DatType" 0 4297 "int8" `1120 
+F G "CheckAutoReset" 0 4298 "int8(int8 DatType)" `832 
+V L "check" 0 4299 "int1" `1119  "/ "1" = true  //Other Alarm active or not "ACK""
 C L "CheckAutoReset" 0 332 1 "FUNCTION"
 C L "CheckAutoReset" 0 332 1 "FUNCTION"
-F N "MAIN" 0 4328 ""
-F G "MAIN" 0 4329 "void()" `1120 
+F N "MAIN" 0 4336 ""
+F G "MAIN" 0 4337 "void()" `1120 
 C L "MAIN" 0 332 1 "FUNCTION"
 C L "MAIN" 0 332 1 "FUNCTION"
 C L "MAIN" 0 332 1 "FUNCTION"
@@ -2701,7 +2699,7 @@ C L "MAIN" 0 332 1 "FUNCTION"
 C L "MAIN" 0 332 1 "FUNCTION"
 C L "MAIN" 0 332 1 "FUNCTION"
 C L "MAIN" 0 332 1 "FUNCTION"
-V L "i" 0 4427 "int8" `1123 
+V L "i" 0 4435 "int8" `1123 
 C L "MAIN" 0 332 1 "FUNCTION"
 C L "MAIN" 0 332 1 "FUNCTION"
 C L "MAIN" 0 332 1 "FUNCTION"
@@ -2713,7 +2711,7 @@ C L "MAIN" 0 332 1 "FUNCTION"
 C L "MAIN" 0 332 1 "FUNCTION"
 C L "MAIN" 0 332 1 "FUNCTION"
 C L "MAIN" 0 332 1 "FUNCTION"
-V L "m" 0 4555 "int8" `1125 
+V L "m" 0 4563 "int8" `1125 
 C L "MAIN" 0 332 1 "FUNCTION"
 C L "MAIN" 0 332 1 "FUNCTION"
 C L "MAIN" 0 332 1 "FUNCTION"

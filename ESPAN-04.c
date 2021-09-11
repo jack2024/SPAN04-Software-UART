@@ -190,7 +190,7 @@ volatile int1 RefreshConfigData =0;
 //int8 temp;
 //int1 RxDreceive = 0;
 
-//////////////////////////////////////
+//////////////////////////////////////second_numofdata = 0x18,
 unsigned char const addr_sq = 0x10, end_sq = 0x11, code_sq = 0x12, start_addr_hi_sq = 0x13, start_addr_lo_sq = 0x14;         //serial sequnce
 unsigned char const ubyte_hi_sq = 0x15, ubyte_lo_sq = 0x16, crc_hi_sq = 0x17,second_numofdata = 0x18, byte_count_sq = 0x19, data_sq = 0x20;      //serial sequnce
 
@@ -199,7 +199,7 @@ unsigned char sequence;         //keep sequence use for RxD
 unsigned char Address;
 unsigned char RxD_DataLen = 0x00;
 unsigned char TxD_Buff[255];
-unsigned char RxD_Buff[1024];
+unsigned char RxD_Buff[512];
 unsigned char CRC_Lo;
 unsigned char CRC_Hi;
 int16 Send_check_Time = 500; //if no send reset buffer every 5 second
@@ -207,7 +207,7 @@ int16 Send_check_Time = 500; //if no send reset buffer every 5 second
 int16 Start_Address = 0x0000;
 int16 No_PointCount = 0x0000;
 unsigned char Data_ByteCount = 0x00;
-unsigned char Data_Buff[1024];
+unsigned char Data_Buff[512];
 //unsigned char DataTemp;
 //unsigned char TxD_DataLen;
 
@@ -216,7 +216,7 @@ int8 MCP23s17_Ip_dat;
 int8 MCP23s17_Op_dat;
 
 unsigned char T_timeout;   //use for calculate RxD timeout
-unsigned char index = 0x00;         //use for Loop
+int16 index = 0x00;         //use for Loop
 
 int8 outmcp23 = 0;
 
@@ -224,14 +224,14 @@ unsigned char sms_phonenumber[15];
 
 //unsigned char SMS_Massage[20][20];
 
-unsigned char SMS_Massage1[41];
-unsigned char SMS_Massage2[41];
-unsigned char SMS_Massage3[41];
-unsigned char SMS_Massage4[41];
-unsigned char SMS_Massage5[41];
-unsigned char SMS_Massage6[41];
-unsigned char SMS_Massage7[41];
-unsigned char SMS_Massage8[41];
+unsigned char SMS_Massage1[32];
+unsigned char SMS_Massage2[32];
+unsigned char SMS_Massage3[32];
+unsigned char SMS_Massage4[32];
+unsigned char SMS_Massage5[32];
+unsigned char SMS_Massage6[32];
+unsigned char SMS_Massage7[32];
+unsigned char SMS_Massage8[32];
 
 unsigned char const CRC_Table_Hi[] = {
 0x00, 0xC1, 0x81, 0x40, 0x01, 0xC0, 0x80, 0x41, 0x01, 0xC0, 0x80, 0x41, 0x00, 0xC1, 0x81,
@@ -485,13 +485,8 @@ void checkCommand(void)
        }
        else if(RxD_Buff[RxD_DataLen - 1] == 0x22)   /////SMS setting/////
        {
-          if(count_bytecount ==0){ // bytecount first Byte
-            count_bytecount++;
-          }
-          else{ // bytecount Second Byte
-            sequence = byte_count_sq ;
-          }
 
+          sequence = second_numofdata ;
           T_timeout = 0x14; //200ms
        }
        else                           // Invalid Code
@@ -501,22 +496,32 @@ void checkCommand(void)
           T_timeout = 0x00; 
           output_bit(P485ctrl,0);
        }
+       
    }
+   ////////////////////////////////
+   else if(sequence == second_numofdata)
+   {
+      RxD_Buff[RxD_DataLen] = SBUF ;      //Byte 3   Start address High Byte
+      restart_wdt();
+      RxD_DataLen ++ ;
+      sequence = byte_count_sq;
+      T_timeout = 0x14; //200ms
+
+   }
+   ////////////////////////////////
    else if(sequence == byte_count_sq)
    {
       RxD_Buff[RxD_DataLen] = SBUF ;      //Byte 3   Data Byte Count
       restart_wdt();
       RxD_DataLen ++ ;
-      /*
       if(RxD_Buff[1] == 0x22)   /////SMS setting/////
       {
-         index = (RxD_Buff[2]*100) + RxD_Buff[3];
+         index = (RxD_Buff[2] * 0x64) + RxD_Buff[3];
       }
       else{
          index = RxD_Buff[RxD_DataLen - 1] ;    //Data Byte Count
       }
-      */
-      index = RxD_Buff[RxD_DataLen - 1] ;    //Data Byte Count
+      
       T_timeout = 0x14; //200ms
       sequence = data_sq ;
    }
@@ -526,7 +531,7 @@ void checkCommand(void)
       restart_wdt();
       RxD_DataLen ++ ;
       index -- ;                     //Data Byte Count
-      if(index == 0x01)
+      if(index == 0x00)
       {
          sequence = ubyte_lo_sq ;      //next CRC
       }
@@ -579,9 +584,10 @@ void checkCommand(void)
       restart_wdt();
       sequence = end_sq;
       T_timeout = 0x00;
-      //T_timeout = 0x14; //200ms
       recieve_completed = 1 ;            //Recieve completed then translate
       output_bit(P485ctrl,0);
+     //T_timeout = 0x14; //200ms  
+     
    }
 }
 
@@ -597,6 +603,7 @@ void Modbus_Function(void)
 
    if(CRC_Hi == RxD_Buff[RxD_DataLen - 1] && CRC_Lo == RxD_Buff[RxD_DataLen])
    {
+      
     
       if((RxD_Buff[0] == 0xAA)&&(RxD_Buff[1] == 0x20)) //Read Setting//0xAA Is Any Address 
       {
@@ -1452,14 +1459,15 @@ void Modbus_Function(void)
          
          else if(RxD_Buff[1] == 0x22)///////////// WRITE Faultname /////////////////////
          {
+            
             //SMS_Massage
             int16  i =4,j=0,k=0; //i =4 are first data from RxD_Buff[]
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 41))
+               if((RxD_Buff[i] == 0x0D) || (j > 32))
                {
-                  write_eeprom(0x5D+i,RxD_Buff[i]);
+                  write_eeprom(0x5D+i,0x0D);
                   break;
                }
                else
@@ -1477,9 +1485,9 @@ void Modbus_Function(void)
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 41))
+               if((RxD_Buff[i] == 0x0D) || (j > 32))
                {  
-                  write_eeprom(0x5D+i,RxD_Buff[i]);
+                  write_eeprom(0x5D+i,0x0D);
                   break;
                }
                else
@@ -1496,9 +1504,9 @@ void Modbus_Function(void)
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 41))
+               if((RxD_Buff[i] == 0x0D) || (j > 32))
                {
-                  write_eeprom(0x5D+i,RxD_Buff[i]);
+                  write_eeprom(0x5D+i,0x0D);
                   break;
                }
                else
@@ -1515,9 +1523,9 @@ void Modbus_Function(void)
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 41))
+               if((RxD_Buff[i] == 0x0D) || (j > 32))
                {
-                  write_eeprom(0x5D+i,RxD_Buff[i]);
+                  write_eeprom(0x5D+i,0x0D);
                   break;
                }
                else
@@ -1534,9 +1542,9 @@ void Modbus_Function(void)
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 41))
+               if((RxD_Buff[i] == 0x0D) || (j > 32))
                {
-                  write_eeprom(0x5D+i,RxD_Buff[i]);
+                  write_eeprom(0x5D+i,0x0D);
                   break;
                }
                else
@@ -1553,9 +1561,9 @@ void Modbus_Function(void)
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 41))
+               if((RxD_Buff[i] == 0x0D) || (j > 32))
                {
-                  write_eeprom(0x5D+i,RxD_Buff[i]);
+                  write_eeprom(0x5D+i,0x0D);
                   break;
                }
                else
@@ -1572,9 +1580,9 @@ void Modbus_Function(void)
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 41))
+               if((RxD_Buff[i] == 0x0D) || (j > 32))
                {
-                  write_eeprom(0x5D+i,RxD_Buff[i]);
+                  write_eeprom(0x5D+i,0x0D);
                   break;
                }
                else
@@ -1591,9 +1599,9 @@ void Modbus_Function(void)
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 41))
+               if((RxD_Buff[i] == 0x0D) || (j > 32))
                {
-                  write_eeprom(0x5D+i,RxD_Buff[i]);
+                  write_eeprom(0x5D+i,0x0D);
                   break;
                }
                else
@@ -1606,7 +1614,7 @@ void Modbus_Function(void)
             
          
             TxD_Buff[0] = Address ;         //Address
-            TxD_Buff[1] = 0x21 ;            //return function code
+            TxD_Buff[1] = 0x22 ;            //return function code
 
             CRC(TxD_Buff,2)   ;            //Cal CRC 2 byte
 
@@ -1665,7 +1673,7 @@ void Modbus_Function(void)
          }
        
 
-      }  
+      }  //if(RxD_Buff[1] == address)
 
       Send_check_Time = 500; //5 Second
    } // if crc
@@ -2260,9 +2268,10 @@ void TIMER2_isr(void)      //10ms
       T_timeout--;
       if(T_timeout == 0)
       {
-         //sequence = stop_sq;         //timeout
-         sequence = end_sq;         //timeout   
-         output_bit(P485ctrl,0);
+          RxD_DataLen = 0x00;
+          sequence = end_sq;
+          T_timeout = 0x00; 
+          output_bit(P485ctrl,0);
       }
    }
    ////////// Time Base 1 Second /////////////
@@ -2340,7 +2349,6 @@ void TIMER2_isr(void)      //10ms
                //output_bit(PSyncS,1);
             }
          //}
-         //FlashingFlag = ~FlashingFlag;
          FlashingRateTime = FlashingRate;      //reload value
       }
 
