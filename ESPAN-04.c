@@ -485,7 +485,6 @@ void checkCommand(void)
        }
        else if(RxD_Buff[RxD_DataLen - 1] == 0x22)   /////SMS setting/////
        {
-
           sequence = second_numofdata ;
           T_timeout = 0x14; //200ms
        }
@@ -1465,7 +1464,7 @@ void Modbus_Function(void)
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 32))
+               if((RxD_Buff[i] == 0x0D) || (j > 30))
                {
                   write_eeprom(0x5D+i,0x0D);
                   break;
@@ -1485,7 +1484,7 @@ void Modbus_Function(void)
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 32))
+               if((RxD_Buff[i] == 0x0D) || (j > 30))
                {  
                   write_eeprom(0x5D+i,0x0D);
                   break;
@@ -1504,7 +1503,7 @@ void Modbus_Function(void)
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 32))
+               if((RxD_Buff[i] == 0x0D) || (j > 30))
                {
                   write_eeprom(0x5D+i,0x0D);
                   break;
@@ -1523,7 +1522,7 @@ void Modbus_Function(void)
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 32))
+               if((RxD_Buff[i] == 0x0D) || (j > 30))
                {
                   write_eeprom(0x5D+i,0x0D);
                   break;
@@ -1542,7 +1541,7 @@ void Modbus_Function(void)
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 32))
+               if((RxD_Buff[i] == 0x0D) || (j > 30))
                {
                   write_eeprom(0x5D+i,0x0D);
                   break;
@@ -1561,7 +1560,7 @@ void Modbus_Function(void)
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 32))
+               if((RxD_Buff[i] == 0x0D) || (j > 30))
                {
                   write_eeprom(0x5D+i,0x0D);
                   break;
@@ -1580,7 +1579,7 @@ void Modbus_Function(void)
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 32))
+               if((RxD_Buff[i] == 0x0D) || (j > 30))
                {
                   write_eeprom(0x5D+i,0x0D);
                   break;
@@ -1599,7 +1598,7 @@ void Modbus_Function(void)
             for(; ; i++,j++)
             {
                restart_wdt();
-               if((RxD_Buff[i] == 0x0D) || (j > 32))
+               if((RxD_Buff[i] == 0x0D) || (j > 30))
                {
                   write_eeprom(0x5D+i,0x0D);
                   break;
