@@ -1,22 +1,22 @@
-Compiling D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04 on 11-¡.Â.-21 at 20:40
->>> Warning 229 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 669(1,1): Subscript out of range
->>> Warning 229 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 2072(1,1): Subscript out of range
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3230(38,39): Code has no effect
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3240(38,39): Code has no effect
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3318(38,39): Code has no effect
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3328(38,39): Code has no effect
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3406(38,39): Code has no effect
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3416(38,39): Code has no effect
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3494(38,39): Code has no effect
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3504(38,39): Code has no effect
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3582(38,39): Code has no effect
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3592(38,39): Code has no effect
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3670(38,39): Code has no effect
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3680(38,39): Code has no effect
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3758(38,39): Code has no effect
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3768(38,39): Code has no effect
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3846(38,39): Code has no effect
->>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3855(38,39): Code has no effect
+Compiling D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04 on 28-¡.Â.-21 at 16:57
+>>> Warning 229 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 697(1,1): Subscript out of range
+>>> Warning 229 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 2102(1,1): Subscript out of range
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3331(38,39): Code has no effect
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3341(38,39): Code has no effect
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3423(38,39): Code has no effect
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3433(38,39): Code has no effect
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3515(38,39): Code has no effect
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3525(38,39): Code has no effect
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3607(38,39): Code has no effect
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3617(38,39): Code has no effect
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3699(38,39): Code has no effect
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3709(38,39): Code has no effect
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3791(38,39): Code has no effect
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3801(38,39): Code has no effect
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3883(38,39): Code has no effect
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3893(38,39): Code has no effect
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3975(38,39): Code has no effect
+>>> Warning 207 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 3984(38,39): Code has no effect
 >>> Warning 202 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 100(6,14): Variable never used:   SyncFlag
 >>> Warning 202 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 106(6,15): Variable never used:   Output595
 >>> Warning 202 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 108(6,14): Variable never used:   tempdata
@@ -49,9 +49,9 @@ Compiling D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN
 >>> Warning 202 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 178(6,19): Variable never used:   OUTGreen19_20
 >>> Warning 202 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 184(6,21): Variable never used:   MasterSlaveSync
 >>> Warning 202 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 216(6,21): Variable never used:   MCP23s17_Op_dat
->>> Warning 202 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 289(14,24): Variable never used:   LED_Colour
->>> Warning 202 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 1464(29,30): Variable never used:   k
->>> Warning 202 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 2092(20,21): Variable never used:   k
-      Memory usage:   ROM=42%      RAM=46% - 47%
+>>> Warning 202 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 295(14,24): Variable never used:   LED_Colour
+>>> Warning 202 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 1492(29,30): Variable never used:   k
+>>> Warning 202 "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_8 - Delay - SP - SMS\ESPAN-04.c" Line 2122(20,21): Variable never used:   k
+      Memory usage:   ROM=37%      RAM=51% - 51%
       0 Errors,  53 Warnings.
 Build Successful.

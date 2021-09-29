@@ -1,5 +1,5 @@
 
-//#include "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_16\ESPAN-04.h"
+#include "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_20 - Delay - SP - SMD - SMS\string.h"
 #include "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_20 - Delay - SP - SMD - PIC18F252\ESPAN-04.h"
 #include "D:\jobESP\ESPAN-04\Firmware\SPAN-04\ESPAN04_20 - Delay - SP - SMD\23S17.c" // 16 bit I/O Expander
 
@@ -233,6 +233,12 @@ unsigned char SMS_Massage6[32];
 unsigned char SMS_Massage7[32];
 unsigned char SMS_Massage8[32];
 
+unsigned char SMS_MassageSUM[160] = ">>";
+
+unsigned char spacestring[] = " ";
+
+volatile int8 send_SMS_period ,send_SMS_count ;
+
 unsigned char const CRC_Table_Hi[] = {
 0x00, 0xC1, 0x81, 0x40, 0x01, 0xC0, 0x80, 0x41, 0x01, 0xC0, 0x80, 0x41, 0x00, 0xC1, 0x81,
 0x40, 0x01, 0xC0, 0x80, 0x41, 0x00, 0xC1, 0x81, 0x40, 0x00, 0xC1, 0x81, 0x40, 0x01, 0xC0,
@@ -378,7 +384,30 @@ void Driver595()
 }
 */
 ////////////////////////////////////////////////////////////////////////////////
+char blankSigned[] = ">>";
+void sendsum_sms(void)
+{
+   if(strcmp(SMS_MassageSUM, blankSigned) != 0){
+   
+      fprintf(CH2,"AT+CMGF=1"); 
+      putc('\n',CH2);
+      delay_ms(10);
+   
+      fprintf(CH2,"AT+CMGS=\"");
+      fprintf(CH2,sms_phonenumber);
+      
+      fprintf(CH2,"\"");
+      putc('\n',CH2);
+      delay_ms(50);
+     
+     fprintf(CH2,SMS_MassageSUM);
+     putc('\n',CH2);
+     putc(26,CH2);
+     
+     strcpy(SMS_MassageSUM, blankSigned);
 
+   }
+}
 ///////////////////////////////////////////////////////////////////////////////
 
 void Alarmtosend(void)
@@ -1631,7 +1660,9 @@ void Modbus_Function(void)
             delay_ms(3);
             output_bit(P485ctrl,0);
          }
-
+   ////////////////////////////// WRITE Faultname //////////////////////////
+         
+         
          if(RxD_Buff[1] == 0x03)///////////// READ HOLDING REGGISTER /////////////////////
          {
 
@@ -2287,6 +2318,10 @@ void TIMER2_isr(void)      //10ms
                AutoAckFlag = 1 ;
             }
          }
+         if(++send_SMS_count >=5){
+            send_SMS_count =0;
+            send_SMS_period = 1;
+         }
          //////////////////////////////
          RefreshConfigData = 1;
          TimeBase1s = 100;
@@ -2412,12 +2447,15 @@ void Anal_Function(void)
             }  
             // SMS Sending   
             if((SendSMS.B1 ==0) && (functointest_f ==0) && (Ack.B1 ==0))
-            {
+            {            
+               SendSMS.B1 =1;
+               strcat(SMS_MassageSUM, SMS_Massage1);
+               strcat(SMS_MassageSUM, spacestring);
+               /*
                fprintf(CH2,"AT+CMGF=1"); 
                putc('\n',CH2);
                delay_ms(10);
-            
-               SendSMS.B1 =1;
+
                fprintf(CH2,"AT+CMGS=\"");
                fprintf(CH2,sms_phonenumber);
                
@@ -2428,6 +2466,7 @@ void Anal_Function(void)
               fprintf(CH2,SMS_Massage1);
               putc('\n',CH2);
               putc(26,CH2);
+          */
             }
             
         }
@@ -2439,16 +2478,18 @@ void Anal_Function(void)
       if((Inputt.B1 ^ InputType.B1) == 1)
       {
          Output.B1 = 0;
-         
-         
+
          // SMS Sending   
          if((SendSMS.B1 ==0) && (functointest_f ==0) && (Ack.B1 ==0))
-         {
+         {            
+            SendSMS.B1 =1;
+            strcat(SMS_MassageSUM, SMS_Massage1);
+            strcat(SMS_MassageSUM, spacestring);
+               /*
             fprintf(CH2,"AT+CMGF=1"); 
             putc('\n',CH2);
             delay_ms(10);
-            
-            SendSMS.B1 =1;
+
             fprintf(CH2,"AT+CMGS=\"");
             fprintf(CH2,sms_phonenumber);
             
@@ -2459,6 +2500,7 @@ void Anal_Function(void)
            fprintf(CH2,SMS_Massage1);
            putc('\n',CH2);
           putc(26,CH2);
+          */
          }
          
       }
@@ -2512,12 +2554,15 @@ void Anal_Function(void)
           }
           // SMS Sending   
             if((SendSMS.B2 ==0)&& (functointest_f ==0) && (Ack.B2 ==0))
-            {
+            {                
+               SendSMS.B2 =1;
+               strcat(SMS_MassageSUM, SMS_Massage2);
+               strcat(SMS_MassageSUM, spacestring);
+               /*
                fprintf(CH2,"AT+CMGF=1"); 
                putc('\n',CH2);
                delay_ms(10);
-                
-               SendSMS.B2 =1;
+
                fprintf(CH2,"AT+CMGS=\"");
                fprintf(CH2,sms_phonenumber);
                
@@ -2528,8 +2573,8 @@ void Anal_Function(void)
               fprintf(CH2,SMS_Massage2);
               putc('\n',CH2);
              putc(26,CH2);
+          */
             }  
-
       }
       else if(FaultType.B2 == 1) Ack.B2 = 0;
    }
@@ -2540,12 +2585,15 @@ void Anal_Function(void)
          Output.B2 = 0;
           // SMS Sending   
          if((SendSMS.B2 ==0)&& (functointest_f ==0) && (Ack.B2 ==0))
-         {
+         {            
+            SendSMS.B2 =1;
+            strcat(SMS_MassageSUM, SMS_Massage2);
+            strcat(SMS_MassageSUM, spacestring);
+               /*
             fprintf(CH2,"AT+CMGF=1"); 
             putc('\n',CH2);
             delay_ms(10);
-            
-            SendSMS.B2 =1;
+
             fprintf(CH2,"AT+CMGS=\"");
             fprintf(CH2,sms_phonenumber);
             
@@ -2556,6 +2604,7 @@ void Anal_Function(void)
            fprintf(CH2,SMS_Massage1);
            putc('\n',CH2);
            putc(26,CH2);
+          */
          }  
       }
       else
@@ -2608,12 +2657,15 @@ void Anal_Function(void)
           }
           // SMS Sending   
             if((SendSMS.B3 ==0)&& (functointest_f ==0) && (Ack.B3 ==0))
-            {
+            {               
+               SendSMS.B3 =1;
+               strcat(SMS_MassageSUM, SMS_Massage3);
+               strcat(SMS_MassageSUM, spacestring);
+               /*
                fprintf(CH2,"AT+CMGF=1"); 
                putc('\n',CH2);
                delay_ms(10);
-               
-               SendSMS.B3 =1;
+
                fprintf(CH2,"AT+CMGS=\"");
                fprintf(CH2,sms_phonenumber);
                
@@ -2624,6 +2676,7 @@ void Anal_Function(void)
               fprintf(CH2,SMS_Massage3);
               putc('\n',CH2);
              putc(26,CH2);
+          */
             }
 
       }
@@ -2636,12 +2689,15 @@ void Anal_Function(void)
          Output.B3 = 0;
          // SMS Sending   
          if((SendSMS.B3 ==0)&& (functointest_f ==0) && (Ack.B3 ==0))
-         {
+         {            
+            SendSMS.B3 =1;
+            strcat(SMS_MassageSUM, SMS_Massage3);
+            strcat(SMS_MassageSUM, spacestring);
+               /*
             fprintf(CH2,"AT+CMGF=1"); 
             putc('\n',CH2);
             delay_ms(10);
-            
-            SendSMS.B3 =1;
+
             fprintf(CH2,"AT+CMGS=\"");
             fprintf(CH2,sms_phonenumber);
             
@@ -2652,6 +2708,7 @@ void Anal_Function(void)
            fprintf(CH2,SMS_Massage3);
            putc('\n',CH2);
           putc(26,CH2);
+          */
          }
       }
       else
@@ -2704,12 +2761,15 @@ void Anal_Function(void)
           }
           // SMS Sending   
             if((SendSMS.B4 ==0)&& (functointest_f ==0) && (Ack.B4 ==0))
-            {
+            {               
+               SendSMS.B4 =1;
+               strcat(SMS_MassageSUM, SMS_Massage4);
+               strcat(SMS_MassageSUM, spacestring);
+               /*
                fprintf(CH2,"AT+CMGF=1"); 
                putc('\n',CH2);
                delay_ms(10);
-               
-               SendSMS.B4 =1;
+
                fprintf(CH2,"AT+CMGS=\"");
                fprintf(CH2,sms_phonenumber);
             
@@ -2720,6 +2780,7 @@ void Anal_Function(void)
               fprintf(CH2,SMS_Massage4);
               putc('\n',CH2);
              putc(26,CH2);
+          */
             }
 
       }
@@ -2733,12 +2794,15 @@ void Anal_Function(void)
          
          // SMS Sending   
          if((SendSMS.B4 ==0)&& (functointest_f ==0) && (Ack.B4 ==0))
-         {
+         {            
+            SendSMS.B4 =1;
+            strcat(SMS_MassageSUM, SMS_Massage4);
+            strcat(SMS_MassageSUM, spacestring);
+               /*
             fprintf(CH2,"AT+CMGF=1"); 
             putc('\n',CH2);
             delay_ms(10);
-            
-            SendSMS.B4 =1;
+
             fprintf(CH2,"AT+CMGS=\"");
             fprintf(CH2,sms_phonenumber);
          
@@ -2749,6 +2813,7 @@ void Anal_Function(void)
            fprintf(CH2,SMS_Massage4);
            putc('\n',CH2);
           putc(26,CH2);
+          */
          }
       }
       else
@@ -2802,12 +2867,15 @@ void Anal_Function(void)
           
           // SMS Sending   
             if((SendSMS.B5 ==0)&& (functointest_f ==0) && (Ack.B5 ==0))
-            {
+            {               
+               SendSMS.B5 =1;
+               strcat(SMS_MassageSUM, SMS_Massage5);
+               strcat(SMS_MassageSUM, spacestring);
+               /*
                fprintf(CH2,"AT+CMGF=1"); 
                putc('\n',CH2);
                delay_ms(10);
-               
-               SendSMS.B5 =1;
+
                fprintf(CH2,"AT+CMGS=\"");
                fprintf(CH2,sms_phonenumber);
                
@@ -2818,6 +2886,7 @@ void Anal_Function(void)
               fprintf(CH2,SMS_Massage5);
               putc('\n',CH2);
              putc(26,CH2);
+          */
             }
 
       }
@@ -2830,12 +2899,15 @@ void Anal_Function(void)
          Output.B5 = 0;
          // SMS Sending   
          if((SendSMS.B5 ==0)&& (functointest_f ==0) && (Ack.B5 ==0))
-         {
+         {            
+            SendSMS.B5 =1;
+            strcat(SMS_MassageSUM, SMS_Massage5);
+            strcat(SMS_MassageSUM, spacestring);
+               /*
             fprintf(CH2,"AT+CMGF=1"); 
             putc('\n',CH2);
             delay_ms(10);
-            
-            SendSMS.B5 =1;
+
             fprintf(CH2,"AT+CMGS=\"");
             fprintf(CH2,sms_phonenumber);
             
@@ -2846,6 +2918,7 @@ void Anal_Function(void)
            fprintf(CH2,SMS_Massage5);  
            putc('\n',CH2);
           putc(26,CH2);
+          */
          }
       }
       else
@@ -2899,12 +2972,15 @@ void Anal_Function(void)
           
           // SMS Sending   
             if((SendSMS.B6 ==0)&& (functointest_f ==0) && (Ack.B6 ==0))
-            {
+            {               
+               SendSMS.B6 =1;
+               strcat(SMS_MassageSUM, SMS_Massage6);
+               strcat(SMS_MassageSUM, spacestring);
+               /*
                fprintf(CH2,"AT+CMGF=1"); 
                putc('\n',CH2);
                delay_ms(10);
-               
-               SendSMS.B6 =1;
+
                fprintf(CH2,"AT+CMGS=\"");
                fprintf(CH2,sms_phonenumber);
                
@@ -2915,6 +2991,7 @@ void Anal_Function(void)
               fprintf(CH2,SMS_Massage6);
               putc('\n',CH2);
              putc(26,CH2);
+          */
             }
 
       }
@@ -2927,12 +3004,16 @@ void Anal_Function(void)
          Output.B6 = 0;
          // SMS Sending   
          if((SendSMS.B6 ==0)&& (functointest_f ==0) && (Ack.B6 ==0))
-         {
+         {            
+            
+            SendSMS.B6 =1;
+            strcat(SMS_MassageSUM, SMS_Massage6);
+            strcat(SMS_MassageSUM, spacestring);
+               /*
             fprintf(CH2,"AT+CMGF=1"); 
             putc('\n',CH2);
             delay_ms(10);
-            
-            SendSMS.B6 =1;
+
             fprintf(CH2,"AT+CMGS=\"");
             fprintf(CH2,sms_phonenumber);
             
@@ -2943,6 +3024,7 @@ void Anal_Function(void)
            fprintf(CH2,SMS_Massage6);  
            putc('\n',CH2);
           putc(26,CH2);
+          */
          }
       }
       else
@@ -2996,12 +3078,15 @@ void Anal_Function(void)
           
           // SMS Sending   
             if((SendSMS.B7 ==0)&& (functointest_f ==0) && (Ack.B7 ==0))
-            {
+            {               
+               SendSMS.B7 =1;
+               strcat(SMS_MassageSUM, SMS_Massage7);
+               strcat(SMS_MassageSUM, spacestring);
+               /*
                fprintf(CH2,"AT+CMGF=1"); 
                putc('\n',CH2);
                delay_ms(10);
-               
-               SendSMS.B7 =1;
+
                fprintf(CH2,"AT+CMGS=\"");
                fprintf(CH2,sms_phonenumber);
                
@@ -3012,6 +3097,7 @@ void Anal_Function(void)
               fprintf(CH2,SMS_Massage7);  
               putc('\n',CH2);
              putc(26,CH2);
+          */
             }
 
       }
@@ -3024,12 +3110,15 @@ void Anal_Function(void)
          Output.B7 = 0;
          // SMS Sending   
          if((SendSMS.B7 ==0)&& (functointest_f ==0) && (Ack.B7 ==0))
-         {
+         {            
+            SendSMS.B7 =1;
+            strcat(SMS_MassageSUM, SMS_Massage7);
+            strcat(SMS_MassageSUM, spacestring);
+               /*
             fprintf(CH2,"AT+CMGF=1"); 
             putc('\n',CH2);
             delay_ms(10);
-            
-            SendSMS.B7 =1;
+
             fprintf(CH2,"AT+CMGS=\"");
             fprintf(CH2,sms_phonenumber);
             
@@ -3040,6 +3129,7 @@ void Anal_Function(void)
            fprintf(CH2,SMS_Massage7); 
            putc('\n',CH2);
           putc(26,CH2);
+          */
          }
       }
       else
@@ -3093,12 +3183,15 @@ void Anal_Function(void)
      
        // SMS Sending   
          if((SendSMS.B8 ==0)&& (functointest_f ==0) && (Ack.B8 ==0))
-         {
+         {            
+            SendSMS.B8 =1;
+            strcat(SMS_MassageSUM, SMS_Massage8);
+            strcat(SMS_MassageSUM, spacestring);
+               /*
             fprintf(CH2,"AT+CMGF=1"); 
             putc('\n',CH2);
             delay_ms(10);
-            
-            SendSMS.B8 =1;
+
             fprintf(CH2,"AT+CMGS=\"");
             fprintf(CH2,sms_phonenumber);
             
@@ -3109,6 +3202,7 @@ void Anal_Function(void)
            printf(SMS_Massage8);  
            putc('\n',CH2);
           putc(26,CH2);
+          */
          }
 
       }
@@ -3121,12 +3215,15 @@ void Anal_Function(void)
          Output.B8 = 0;
          // SMS Sending   
          if((SendSMS.B8 ==0)&& (functointest_f ==0) && (Ack.B8 ==0))
-         {
+         {            
+            SendSMS.B8 =1;
+            strcat(SMS_MassageSUM, SMS_Massage8);
+            strcat(SMS_MassageSUM, spacestring);
+               /*
             printf("AT+CMGF=1"); 
             putc('\n',CH2);
             delay_ms(10);
-            
-            SendSMS.B8 =1;
+
             fprintf(CH2,"AT+CMGS=\"");
             fprintf(CH2,sms_phonenumber);
             
@@ -3137,6 +3234,7 @@ void Anal_Function(void)
            fprintf(CH2,SMS_Massage8);  
            putc('\n',CH2);
           putc(26,CH2);
+          */
          }
       }
       else
@@ -3204,6 +3302,9 @@ static unsigned char inputflag = 0;
       if((SendSMS.B1 ==0) && (functointest_f ==0) && (Ack.B1 ==0))
       {
          SendSMS.B1 =1;
+         strcat(SMS_MassageSUM, SMS_Massage1);
+         strcat(SMS_MassageSUM, spacestring);
+         /*
          fprintf(CH2,"AT+CMGS=\"");
          fprintf(CH2,sms_phonenumber);
          
@@ -3214,6 +3315,7 @@ static unsigned char inputflag = 0;
         fprintf(CH2,SMS_Massage1);   
         putc('\n',CH2);
        putc(26,CH2);
+        */
       }
    }
    else if(FaultType.B1 == 0)
@@ -3292,6 +3394,9 @@ static unsigned char inputflag = 0;
       if((SendSMS.B2 ==0)&& (functointest_f ==0) && (Ack.B2 ==0))
       {
          SendSMS.B2 =1;
+         strcat(SMS_MassageSUM, SMS_Massage2);
+         strcat(SMS_MassageSUM, spacestring);
+         /*
          fprintf(CH2,"AT+CMGS=\"");
          fprintf(CH2,sms_phonenumber);
          
@@ -3302,6 +3407,7 @@ static unsigned char inputflag = 0;
         fprintf(CH2,SMS_Massage2); 
         putc('\n',CH2);
        putc(26,CH2);
+        */
       }
    }
    else if(FaultType.B2 == 0)
@@ -3380,6 +3486,9 @@ static unsigned char inputflag = 0;
       if((SendSMS.B3 ==0)&& (functointest_f ==0) && (Ack.B3 ==0))
       {
          SendSMS.B3 =1;
+         strcat(SMS_MassageSUM, SMS_Massage3);
+         strcat(SMS_MassageSUM, spacestring);
+         /*
          fprintf(CH2,"AT+CMGS=\"");
          fprintf(CH2,sms_phonenumber);
          
@@ -3390,6 +3499,7 @@ static unsigned char inputflag = 0;
         fprintf(CH2,SMS_Massage3); 
         putc('\n',CH2);
        putc(26,CH2);
+        */
       }
    }
    else if(FaultType.B3 == 0)
@@ -3468,6 +3578,9 @@ static unsigned char inputflag = 0;
       if((SendSMS.B4 ==0)&& (functointest_f ==0) && (Ack.B4 ==0))
       {
          SendSMS.B4 =1;
+         strcat(SMS_MassageSUM, SMS_Massage4);
+         strcat(SMS_MassageSUM, spacestring);
+         /*
          fprintf(CH2,"AT+CMGS=\"");
          fprintf(CH2,sms_phonenumber);
          
@@ -3478,6 +3591,7 @@ static unsigned char inputflag = 0;
         fprintf(CH2,SMS_Massage4); 
         putc('\n',CH2);
        putc(26,CH2);
+        */
       }
    }
    else if(FaultType.B4 == 0)
@@ -3556,6 +3670,9 @@ static unsigned char inputflag = 0;
       if((SendSMS.B5 ==0)&& (functointest_f ==0) && (Ack.B5 ==0))
       {
          SendSMS.B5 =1;
+         strcat(SMS_MassageSUM, SMS_Massage5);
+         strcat(SMS_MassageSUM, spacestring);
+         /*
          fprintf(CH2,"AT+CMGS=\"");
          fprintf(CH2,sms_phonenumber);
          
@@ -3566,6 +3683,7 @@ static unsigned char inputflag = 0;
         fprintf(CH2,SMS_Massage5); 
         putc('\n',CH2);
        putc(26,CH2);
+        */
       }
    }
    else if(FaultType.B5 == 0)
@@ -3644,6 +3762,9 @@ static unsigned char inputflag = 0;
       if((SendSMS.B6 ==0)&& (functointest_f ==0) && (Ack.B6 ==0))
       {
          SendSMS.B6 =1;
+         strcat(SMS_MassageSUM, SMS_Massage6);
+         strcat(SMS_MassageSUM, spacestring);
+         /*
          fprintf(CH2,"AT+CMGS=\"");
          fprintf(CH2,sms_phonenumber);
          
@@ -3654,6 +3775,7 @@ static unsigned char inputflag = 0;
         fprintf(CH2,SMS_Massage6);  
         putc('\n',CH2);
        putc(26,CH2);
+        */
       }
    }
    else if(FaultType.B6 == 0)
@@ -3732,6 +3854,9 @@ static unsigned char inputflag = 0;
       if((SendSMS.B7 ==0)&& (functointest_f ==0) && (Ack.B7 ==0))
       {
          SendSMS.B7 =1;
+         strcat(SMS_MassageSUM, SMS_Massage7);
+         strcat(SMS_MassageSUM, spacestring);
+         /*
          fprintf(CH2,"AT+CMGS=\"");
          fprintf(CH2,sms_phonenumber);
          
@@ -3742,6 +3867,7 @@ static unsigned char inputflag = 0;
         fprintf(CH2,SMS_Massage7);  
         putc('\n',CH2);
        putc(26,CH2);
+        */
       }
    }
    else if(FaultType.B7 == 0)
@@ -3820,6 +3946,9 @@ static unsigned char inputflag = 0;
       if((SendSMS.B8 ==0) && (functointest_f ==0) && (Ack.B8 ==0))
       {
          SendSMS.B8 =1;
+         strcat(SMS_MassageSUM, SMS_Massage8);
+         strcat(SMS_MassageSUM, spacestring);
+         /*
          fprintf(CH2,"AT+CMGS=\"");
          fprintf(CH2,sms_phonenumber);
          
@@ -3830,6 +3959,7 @@ static unsigned char inputflag = 0;
         fprintf(CH2,SMS_Massage8);   
         putc('\n',CH2);
         putc(26,CH2);
+        */
       }
    }
    else if(FaultType.B8 == 0)
@@ -4142,7 +4272,7 @@ void check_test(void)
        {
           functointest_f = 1;
           ForceAllAlarm();
-          Anal_Function();
+          //Anal_Function();
           if(Input(Ptest) == 1)
           {
             Test_fault = 0;
@@ -4543,7 +4673,80 @@ void main()
    restart_wdt();
    delay_ms(100);
 
-   
+   // jj
+   /*
+   char i;
+   for(i=1;i<=8;i++)
+   {
+      FaultAgo[i] = 0;
+      FaultNow[i] = 0;
+      ReleaseTime[i] = 0;
+      
+      if(FaultNCNO[i] ==NO)
+      {
+         switch(i)
+         {
+            case 1:
+               Inputt.B1 = 0; 
+            break;
+            case 2:
+               Inputt.B2 = 0; 
+            break;
+            case 3:
+               Inputt.B3 = 0; 
+            break;
+            case 4:
+               Inputt.B4 = 0; 
+            break;
+            case 5:
+               Inputt.B5 = 0; 
+            break;
+            case 6:
+               Inputt.B6 = 0; 
+            break;
+            case 7:
+               Inputt.B7 = 0; 
+             break;
+             case 8:
+               Inputt.B8 = 0; 
+            break;
+            
+         }                 
+      }
+      else
+      {
+         switch(i)
+         {
+            case 1:
+               Inputt.B1 = 1; 
+            break;
+            case 2:
+               Inputt.B2 = 1; 
+            break;
+            case 3:
+               Inputt.B3 = 1; 
+            break;
+            case 4:
+               Inputt.B4 = 1; 
+            break;
+            case 5:
+               Inputt.B5 = 1; 
+            break;
+            case 6:
+               Inputt.B6 = 1; 
+            break;
+            case 7:
+               Inputt.B7 = 1; 
+             break;
+             case 8:
+               Inputt.B8 = 1; 
+            break;
+           
+         }                 
+      }
+      
+   }
+   */
    //GSM SIM900 Init
    delay_ms(1000);
    fprintf(CH2,"AT+CMGF=1"); 
@@ -4565,8 +4768,9 @@ void main()
       sms_phonenumber[m] = read_eeprom(0x32 + m);
    }
    sms_phonenumber[m] = '\0' ; // end string
-
    delay_ms(500);
+   functointest_f =0;
+   
    while(TRUE)
    {
 
@@ -4589,10 +4793,15 @@ void main()
       
       restart_wdt();
 
-      Read_input(); restart_wdt(); //must be first
-      Anal_Function(); restart_wdt();
-      Send_Ouput(); restart_wdt();
+      
+      Anal_Function(); 
+      Send_Ouput(); 
+      Read_input();  //must be first
       //Driver595(); restart_wdt();
+      if(send_SMS_period){
+         send_SMS_period =0;
+         sendsum_sms();
+      }
       
       output_toggle(PIN_A0);
       
